@@ -6,8 +6,12 @@ if status is-interactive
     
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
-    eval /home/gray/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+    # eval /home/gray/miniconda3/bin/conda "shell.fish" "hook" $argv | source
     # <<< conda initialize <<<
+end
+
+function dotfiles
+    git --git-dir=$HOME/.my-dotfiles/ --work-tree=$HOME $argv
 end
 
 function fish_greeting

@@ -2,17 +2,17 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: "Source Code Pro"
+    family: JetBrainsMono Nerd Font
     style: Light
     # style: Retina
 
   # The bold font face
   bold:
-    family: "Source Code Pro"
+    family: JetBrainsMono Nerd Font
     style: Medium
 
   # The italic font face
   italic:
-    family: "Source Code Pro"
+    family: JetBrainsMono Nerd Font
     style: "Light Italic"
     # style: "Medium Italic"
