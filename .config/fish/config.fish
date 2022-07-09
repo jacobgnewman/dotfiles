@@ -34,6 +34,6 @@ function fuck
     thefuck $argv
 end
 
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/gray/code/tools/google-cloud-sdk/path.fish.inc' ]; . '/home/gray/code/tools/google-cloud-sdk/path.fish.inc'; end
-

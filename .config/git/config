@@ -1,0 +1,5 @@
+[user]
+    email = jacobgnewman@icloud.com
+    name = Jacob Newman
+[core]
+    editor = nvim

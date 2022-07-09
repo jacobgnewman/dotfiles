@@ -51,7 +51,10 @@ Plug 'ryanoasis/vim-devicons'       " adds file glyphs
 Plug 'preservim/nerdcommenter'      " for comment functions
 Plug 'mhinz/vim-startify'           " fancy start screen
 Plug 'feline-nvim/feline.nvim'      " statusline
-    Plug 'nvim-lua/plenary.nvim'        " lua functions for other plugins
+Plug 'nvim-lua/plenary.nvim'        " lua functions for other plugins
+
+" LSP Packages
+Plug 'neovim/nvim-lspconfig'
 "Syntax support
 Plug 'cespare/vim-toml'
 Plug 'elkowar/yuck.vim'
