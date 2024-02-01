@@ -1,4 +1,4 @@
-#!/user/bin/env bash
+#!/user/bin/bash
 
 # credit https://github.com/justrowingby/dotfiles/blob/mainline/dotfiles.sh
 set -euxo pipefail
@@ -21,3 +21,4 @@ function link_config_dir() {
 
 mkdir -p ~/.config
 link_config_dir git ~/.config/git
+link_config_dir helix ~/.config/helix
