@@ -22,3 +22,4 @@ function link_config_dir() {
 mkdir -p ~/.config
 link_config_dir git ~/.config/git
 link_config_dir helix ~/.config/helix
+link_config_dir tmux ~/.config/tmux
