@@ -1,5 +1,5 @@
 {
-  description = "Mac-os Nix-darwin config";
+  description = "MacOS Nix-darwin config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -31,8 +31,8 @@
         enable = true;
         onActivation.cleanup = "uninstall";
         taps = [];
-        brews = [];
-        casks = [];
+        brews = [ ];
+        casks = [ "kiwix" ];
       };
 
       users.users.gray = {
@@ -78,7 +78,10 @@
       system.stateVersion = 4;
 
       # The platform the configuration will be used on.
+      # nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.hostPlatform = "x86_64-darwin";
+      nixpkgs.config.allowUnfree = true;
+
     };
     # home-mangaer config
     homeconfig = {pkgs, ...}: {
@@ -95,7 +98,8 @@
         direnv
         nix-direnv
       
-        # terminal utils
+        # --------- Terminal Utils --------- 
+
         bat
         btop
         eza
@@ -110,21 +114,32 @@
         tmux
         wget
 
-        # code/utils
-        # bear <- Broken on mac
+        # --------- code/utils --------- 
         binutils
         dprint   # formatting for strange files 
         helix
         llvm
         nixd
-        opam
-        # openjdk@17
+        # python
         python3
-        qemu
-        rust-analyzer
 
+        # rust
+        rustup
+        rust-analyzer
         typst
-        tectonic # latex-lsp
+
+        # latex
+        tectonic # build system 
+        texlab   # lsp
+
+        opam
+        qemu
+
+        # --------- Applications --------- 
+
+        # alacritty
+        # inkscape
+        # raycast
       ];
 
       programs.fish = {
