@@ -39,37 +39,7 @@
         name = "gray";
         home = "/Users/gray";
         shell = pkgs.fish;
-        packages = with pkgs; [
-
-          # terminal utils
-          bat
-          btop
-          eza
-          fzf
-          gh
-          git-lfs
-          jq
-          lazygit
-          nmap
-          ripgrep
-          rsync
-          tmux
-          wget
-
-          # code/utils
-          # bear <- Broken on mac
-          binutils
-          dprint   # formatting for strange files 
-          helix
-          llvm
-          nixd
-          opam
-          # openjdk@17
-          python3
-          qemu
-          rust-analyzer
-          tectonic # latex-lsp
-        ];
+        packages = with pkgs; [];
         
       };
 
@@ -81,9 +51,25 @@
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
+      # system settings
+      system.defaults = {
+        dock = {
+          autohide = true;
+          mru-spaces = false; # don't rearrange spaces baset on most recently used
+          show-recents = false;
+        };
+
+        finder = {
+          AppleShowAllExtensions = true;
+          FXEnableExtensionChangeWarning = false;
+          ShowPathbar= true;
+          ShowStatusBar = true;
+        };
+      };
+
       # Create /etc/zshrc that loads the nix-darwin environment.
-      # programs.zsh.enable = true;  # default shell on catalina
       programs.fish.enable = true;
+      programs.zsh.enable = true;  # default shell on catalina
 
       security.pam.enableSudoTouchIdAuth = true;
 
@@ -101,11 +87,79 @@
       # let home-manager install & manage itself
       programs.home-manager.enable = true;
 
-      home.packages = with pkgs; [];
+      
+
+      home.packages = with pkgs; [
+
+        # Project management
+        direnv
+        nix-direnv
+      
+        # terminal utils
+        bat
+        btop
+        eza
+        fzf
+        gh
+        git-lfs
+        jq
+        lazygit
+        nmap
+        ripgrep
+        rsync
+        tmux
+        wget
+
+        # code/utils
+        # bear <- Broken on mac
+        binutils
+        dprint   # formatting for strange files 
+        helix
+        llvm
+        nixd
+        opam
+        # openjdk@17
+        python3
+        qemu
+        rust-analyzer
+
+        typst
+        tectonic # latex-lsp
+      ];
+
+      programs.fish = {
+        enable = true;
+        shellAliases = {
+          drs = "darwin-rebuild switch --flake ~/dotfiles/nix/mac";
+        };
+      };
+
+      # programs.zsh = {
+      #   enable = true;
+      #   shellAliases = {
+      #     drs = "darwin-rebuild switch --flake ~/dotfiles/nix/mac";
+      #   };
+      # };
 
       home.sessionVariables = {
         EDITOR = "vim";
       };
+
+      programs.git = {
+        enable = true;
+        userName = "jacobgnewman";
+        userEmail = "57055451+jacobgnewman@users.noreply.github.com";
+        ignores = [ ".DS_Store" ];
+        extraConfig = {
+          init.defaultBranch = "main";
+          push.autoSetupRemote = true;
+        };
+      };
+
+      # programs.tmux = {
+      #   enable = true;
+      #   keyMode = "vi";
+      # };
       
     };
   in
