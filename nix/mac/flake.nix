@@ -32,7 +32,9 @@
         onActivation.cleanup = "uninstall";
         taps = [];
         brews = [ ];
-        casks = [ "kiwix" ];
+        casks = [ 
+        "kiwix"
+        ];
       };
 
       users.users.gray = {
@@ -40,7 +42,6 @@
         home = "/Users/gray";
         shell = pkgs.fish;
         packages = with pkgs; [];
-        
       };
 
       
@@ -78,19 +79,16 @@
       system.stateVersion = 4;
 
       # The platform the configuration will be used on.
-      # nixpkgs.hostPlatform = "aarch64-darwin";
-      nixpkgs.hostPlatform = "x86_64-darwin";
+      nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.config.allowUnfree = true;
-
     };
+
     # home-mangaer config
     homeconfig = {pkgs, ...}: {
 
       home.stateVersion = "23.05";
       # let home-manager install & manage itself
       programs.home-manager.enable = true;
-
-      
 
       home.packages = with pkgs; [
 
@@ -125,7 +123,7 @@
 
         # rust
         rustup
-        rust-analyzer
+
         typst
 
         # latex
@@ -137,9 +135,10 @@
 
         # --------- Applications --------- 
 
-        # alacritty
-        # inkscape
-        # raycast
+        alacritty
+        inkscape
+        raycast
+        sioyek  # pdf viewer
       ];
 
       programs.fish = {
@@ -149,12 +148,12 @@
         };
       };
 
-      # programs.zsh = {
-      #   enable = true;
-      #   shellAliases = {
-      #     drs = "darwin-rebuild switch --flake ~/dotfiles/nix/mac";
-      #   };
-      # };
+      programs.zsh = {
+        enable = true;
+        shellAliases = {
+          drs = "darwin-rebuild switch --flake ~/dotfiles/nix/mac";
+        };
+      };
 
       home.sessionVariables = {
         EDITOR = "vim";
