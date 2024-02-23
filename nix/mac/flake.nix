@@ -33,7 +33,13 @@
         taps = [];
         brews = [ ];
         casks = [ 
+        "binary-ninja"
         "kiwix"
+        "kicad"
+        "saleae-logic"
+        "tunnelblick"
+        "talon"
+        "obs"
         ];
       };
 
@@ -41,7 +47,67 @@
         name = "gray";
         home = "/Users/gray";
         shell = pkgs.fish;
-        packages = with pkgs; [];
+        packages = with pkgs; [
+          
+          # Project management
+          direnv
+          nix-direnv
+      
+          # --------- Terminal Utils --------- 
+          bat
+          btop
+          eza
+          fzf
+          gh
+          git-lfs
+          jq
+          lazygit
+          nmap
+          ripgrep
+          rsync
+          tmux
+          wget
+          zoxide
+
+          # --------- code/utils --------- 
+          binutils
+          dprint   # formatting for strange files 
+          helix
+          llvm
+          nixd
+          # python
+          python3
+
+          # rust
+          rustup
+
+          typst
+
+          # latex
+          tectonic # build system 
+          texlab   # lsp
+
+          opam
+          qemu
+
+          # --------- Applications --------- 
+          alacritty
+          discord
+          inkscape
+          obsidian
+          raycast
+          sioyek  # pdf viewer
+          spotify
+          tailscale
+          utm
+          wireshark
+          vscode
+        ];
+      };
+
+      fonts = {
+        fontDir.enable = true;
+        fonts = with pkgs;[ dejavu_fonts jetbrains-mono ];
       };
 
       
@@ -68,9 +134,11 @@
         };
       };
 
-      # Create /etc/zshrc that loads the nix-darwin environment.
+      # 
       programs.fish.enable = true;
       programs.zsh.enable = true;  # default shell on catalina
+      environment.shells = with pkgs; [ fish zsh ];
+      # $ chsh -s /run/current-system/sw/bin/fish
 
       security.pam.enableSudoTouchIdAuth = true;
 
@@ -89,57 +157,6 @@
       home.stateVersion = "23.05";
       # let home-manager install & manage itself
       programs.home-manager.enable = true;
-
-      home.packages = with pkgs; [
-
-        # Project management
-        direnv
-        nix-direnv
-      
-        # --------- Terminal Utils --------- 
-
-        bat
-        btop
-        eza
-        fzf
-        gh
-        git-lfs
-        jq
-        lazygit
-        nmap
-        ripgrep
-        rsync
-        tmux
-        wget
-
-        # --------- code/utils --------- 
-        binutils
-        dprint   # formatting for strange files 
-        helix
-        llvm
-        nixd
-        # python
-        python3
-
-        # rust
-        rustup
-
-        typst
-
-        # latex
-        tectonic # build system 
-        texlab   # lsp
-
-        opam
-        qemu
-
-        # --------- Applications --------- 
-
-        alacritty
-        inkscape
-        raycast
-        sioyek  # pdf viewer
-      ];
 
       programs.fish = {
         enable = true;
@@ -170,10 +187,35 @@
         };
       };
 
-      # programs.tmux = {
-      #   enable = true;
-      #   keyMode = "vi";
-      # };
+      programs.tmux = {
+        enable = true;
+        keyMode = "vi";
+        mouse = true;
+        shell = "/run/current-system/sw/bin/fish";
+        terminal = "xterm-256color";
+        extraConfig = ''
+          set -as terminal-overrides ",alacritty*:Tc"
+          unbind C-b
+          set-option -g prefix C-a
+          bind-key C-a send-prefix
+
+
+          # vim binds to navigate panes
+          bind h select-pane -L
+          bind j select-pane -D
+          bind k select-pane -U
+          bind l select-pane -R
+
+          # rebind splits
+          bind | split-window -h
+          bind - split-window -v
+          unbind '"'
+          unbind %
+
+          # hot-reload helper
+          bind r source-file ~/.tmux.conf
+        '';
+      };
       
     };
   in
