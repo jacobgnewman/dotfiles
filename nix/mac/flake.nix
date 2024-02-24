@@ -37,9 +37,12 @@
         "kiwix"
         "kicad"
         "saleae-logic"
+        "spotify"
         "tunnelblick"
         "talon"
         "obs"
+        "vlc"
+        "zed"
         ];
       };
 
@@ -97,7 +100,6 @@
           obsidian
           raycast
           sioyek  # pdf viewer
-          spotify
           tailscale
           utm
           wireshark
