@@ -16,14 +16,34 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
     configuration = { pkgs, ... }: {
+
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "aarch64-darwin";
+      nixpkgs.config.allowUnfree = true;
+
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
+
+      # system packages
       environment.systemPackages = with pkgs;
         [ 
+          # --------- Terminal Utils --------- 
           git
           neofetch
           neovim
           vim 
+          
+          # --------- Applications --------- 
+          # For *some* apps to show up in /Applications they must be added here...
+          alacritty
+          discord
+          inkscape
+          obsidian
+          sioyek  # pdf viewer
+          tailscale
+          utm
+          wireshark
+          vscode
         ];
 
       # broken?
@@ -31,11 +51,12 @@
         enable = true;
         onActivation.cleanup = "uninstall";
         taps = [];
-        brews = [ ];
+        brews = [];
         casks = [ 
         "binary-ninja"
         "kiwix"
         "kicad"
+        "raycast"
         "saleae-logic"
         "spotify"
         "tunnelblick"
@@ -51,11 +72,9 @@
         home = "/Users/gray";
         shell = pkgs.fish;
         packages = with pkgs; [
-          
-          # Project management
+          # --------- Project management --------- 
           direnv
           nix-direnv
-      
           # --------- Terminal Utils --------- 
           bat
           btop
@@ -71,51 +90,31 @@
           tmux
           wget
           zoxide
-
           # --------- code/utils --------- 
           binutils
           dprint   # formatting for strange files 
           helix
           llvm
-          nixd
-          # python
+          nil
           python3
-
-          # rust
           rustup
-
           typst
-
-          # latex
-          tectonic # build system 
-          texlab   # lsp
-
+          tectonic # latex build system 
+          texlab   # latex lsp
           opam
           qemu
-
-          # --------- Applications --------- 
-          alacritty
-          discord
-          inkscape
-          obsidian
-          raycast
-          sioyek  # pdf viewer
-          tailscale
-          utm
-          wireshark
-          vscode
         ];
       };
 
       fonts = {
         fontDir.enable = true;
-        fonts = with pkgs;[ dejavu_fonts jetbrains-mono ];
+        fonts = with pkgs;[
+          jetbrains-mono
+        ];
       };
-
       
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
-      # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
@@ -134,13 +133,36 @@
           ShowPathbar= true;
           ShowStatusBar = true;
         };
+
+        NSGlobalDomain = {
+          AppleShowAllExtensions = true;
+          ApplePressAndHoldEnabled = false;
+
+          # 120, 90, 60, 30, 12, 6, 2
+          KeyRepeat = 120;
+
+          # 120, 94, 68, 35, 25, 15
+          InitialKeyRepeat = 15;
+
+          "com.apple.mouse.tapBehavior" = 1;
+          "com.apple.sound.beep.volume" = 0.0;
+          "com.apple.sound.beep.feedback" = 0;
+        };
+
+        
       };
 
-      # 
+      system.keyboard = {
+        enableKeyMapping = true;
+        remapCapsLockToControl = true;
+      };
+
+
+      # To set fish as proper shell
+      # $ chsh -s /run/current-system/sw/bin/fish
       programs.fish.enable = true;
       programs.zsh.enable = true;  # default shell on catalina
       environment.shells = with pkgs; [ fish zsh ];
-      # $ chsh -s /run/current-system/sw/bin/fish
 
       security.pam.enableSudoTouchIdAuth = true;
 
@@ -148,31 +170,14 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-      nixpkgs.config.allowUnfree = true;
     };
 
     # home-mangaer config
     homeconfig = {pkgs, ...}: {
-
       home.stateVersion = "23.05";
+
       # let home-manager install & manage itself
       programs.home-manager.enable = true;
-
-      programs.fish = {
-        enable = true;
-        shellAliases = {
-          drs = "darwin-rebuild switch --flake ~/dotfiles/nix/mac";
-        };
-      };
-
-      programs.zsh = {
-        enable = true;
-        shellAliases = {
-          drs = "darwin-rebuild switch --flake ~/dotfiles/nix/mac";
-        };
-      };
 
       home.sessionVariables = {
         EDITOR = "vim";
@@ -188,43 +193,13 @@
           push.autoSetupRemote = true;
         };
       };
-
-      programs.tmux = {
-        enable = true;
-        keyMode = "vi";
-        mouse = true;
-        shell = "/run/current-system/sw/bin/fish";
-        terminal = "xterm-256color";
-        extraConfig = ''
-          set -as terminal-overrides ",alacritty*:Tc"
-          unbind C-b
-          set-option -g prefix C-a
-          bind-key C-a send-prefix
-
-
-          # vim binds to navigate panes
-          bind h select-pane -L
-          bind j select-pane -D
-          bind k select-pane -U
-          bind l select-pane -R
-
-          # rebind splits
-          bind | split-window -h
-          bind - split-window -v
-          unbind '"'
-          unbind %
-
-          # hot-reload helper
-          bind r source-file ~/.tmux.conf
-        '';
-      };
       
     };
   in
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#MBP
-    darwinConfigurations."MBP" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."Jacobs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [ 
         configuration
         home-manager.darwinModules.home-manager  {

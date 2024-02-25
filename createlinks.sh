@@ -9,7 +9,7 @@ echo "scriptdir: ${scriptdir}"
 function link_config_dir() {
 		if [[ -e "$2" && ! -L "$2" ]] ; then 
 			echo "$2 exists and is not a symlink. not replacing." >&2
-			return 1
+		  return 0
 		fi
 		# "ln -sf source link" follows symlinks by default on ancient BSD (thus on macOS)
     # the fix on ancient BSD is to add -h, which doesn't exist on GNU ln bc it simply does the reasonable thing in the first place
@@ -20,6 +20,7 @@ function link_config_dir() {
 }
 
 mkdir -p ~/.config
-link_config_dir git ~/.config/git
+link_config_dir alacritty ~/.config/alacritty
 link_config_dir helix ~/.config/helix
+link_config_dir git ~/.config/git
 link_config_dir tmux ~/.config/tmux
