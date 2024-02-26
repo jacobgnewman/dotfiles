@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+set -e
+pushd ~/dotfiles/nix/mac
+hx flake.nix
+alejandra . &>/dev/null
+git diff -U0 *.nix
+darwin-rebuild switch --flake ~/dotfiles/nix/mac
+popd

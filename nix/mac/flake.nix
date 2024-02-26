@@ -13,10 +13,13 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
-  let
-    configuration = { pkgs, ... }: {
-
+  outputs = inputs @ {
+    self,
+    nix-darwin,
+    nixpkgs,
+    home-manager,
+  }: let
+    configuration = {pkgs, ...}: {
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.config.allowUnfree = true;
@@ -25,45 +28,47 @@
       # $ nix-env -qaP | grep wget
 
       # system packages
-      environment.systemPackages = with pkgs;
-        [ 
-          # --------- Terminal Utils --------- 
-          git
-          neofetch
-          neovim
-          vim 
-          
-          # --------- Applications --------- 
-          # For *some* apps to show up in /Applications they must be added here...
-          alacritty
-          discord
-          inkscape
-          obsidian
-          sioyek  # pdf viewer
-          tailscale
-          utm
-          wireshark
-          vscode
-        ];
+      environment.systemPackages = with pkgs; [
+        # --------- Terminal Utils ---------
+        git
+        neofetch
+        neovim
+        vim
+
+        # --------- Applications ---------
+        # For *some* apps to show up in /Applications they must be added here...
+        alacritty
+        discord
+        inkscape
+        obsidian
+        sioyek # pdf viewer
+        tailscale
+        utm
+        wireshark
+        vscode
+      ];
 
       # broken?
       homebrew = {
         enable = true;
         onActivation.cleanup = "uninstall";
-        taps = [];
+        taps = [
+          "homebrew/cask-versions"
+        ];
         brews = [];
-        casks = [ 
-        "binary-ninja"
-        "kiwix"
-        "kicad"
-        "raycast"
-        "saleae-logic"
-        "spotify"
-        "tunnelblick"
-        "talon"
-        "obs"
-        "vlc"
-        "zed"
+        casks = [
+          "binary-ninja"
+          "firefox-developer-edition"
+          "kiwix"
+          "kicad"
+          "raycast"
+          "saleae-logic"
+          "spotify"
+          "tunnelblick"
+          "talon"
+          "obs"
+          "vlc"
+          "zed"
         ];
       };
 
@@ -72,10 +77,10 @@
         home = "/Users/gray";
         shell = pkgs.fish;
         packages = with pkgs; [
-          # --------- Project management --------- 
+          # --------- Project management ---------
           direnv
           nix-direnv
-          # --------- Terminal Utils --------- 
+          # --------- Terminal Utils ---------
           bat
           btop
           eza
@@ -84,23 +89,26 @@
           git-lfs
           jq
           lazygit
+          mold
           nmap
           ripgrep
           rsync
           tmux
           wget
           zoxide
-          # --------- code/utils --------- 
+          # --------- code/utils ---------
+          alejandra # nix code formatter
           binutils
-          dprint   # formatting for strange files 
+          dprint # formatting for strange files
           helix
           llvm
           nil
+          marksman
           python3
           rustup
           typst
-          tectonic # latex build system 
-          texlab   # latex lsp
+          tectonic # latex build system
+          texlab # latex lsp
           opam
           qemu
         ];
@@ -108,11 +116,11 @@
 
       fonts = {
         fontDir.enable = true;
-        fonts = with pkgs;[
+        fonts = with pkgs; [
           jetbrains-mono
         ];
       };
-      
+
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
 
@@ -130,7 +138,7 @@
         finder = {
           AppleShowAllExtensions = true;
           FXEnableExtensionChangeWarning = false;
-          ShowPathbar= true;
+          ShowPathbar = true;
           ShowStatusBar = true;
         };
 
@@ -148,8 +156,6 @@
           "com.apple.sound.beep.volume" = 0.0;
           "com.apple.sound.beep.feedback" = 0;
         };
-
-        
       };
 
       system.keyboard = {
@@ -157,19 +163,17 @@
         remapCapsLockToControl = true;
       };
 
-
       # To set fish as proper shell
       # $ chsh -s /run/current-system/sw/bin/fish
       programs.fish.enable = true;
-      programs.zsh.enable = true;  # default shell on catalina
-      environment.shells = with pkgs; [ fish zsh ];
+      programs.zsh.enable = true; # default shell on catalina
+      environment.shells = with pkgs; [fish zsh];
 
       security.pam.enableSudoTouchIdAuth = true;
 
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
-
     };
 
     # home-mangaer config
@@ -187,26 +191,25 @@
         enable = true;
         userName = "jacobgnewman";
         userEmail = "57055451+jacobgnewman@users.noreply.github.com";
-        ignores = [ ".DS_Store" ];
+        ignores = [".DS_Store"];
         extraConfig = {
           init.defaultBranch = "main";
           push.autoSetupRemote = true;
         };
       };
-      
     };
-  in
-  {
+  in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#MBP
     darwinConfigurations."Jacobs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [ 
+      modules = [
         configuration
-        home-manager.darwinModules.home-manager  {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.verbose = true;
-                home-manager.users.gray = homeconfig;
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.verbose = true;
+          home-manager.users.gray = homeconfig;
         }
       ];
     };
