@@ -100,6 +100,9 @@
           alejandra # nix code formatter
           binutils
           dprint # formatting for strange files
+          erlang
+          elixir
+          elixir-ls
           helix
           llvm
           nil
@@ -114,6 +117,8 @@
         ];
       };
 
+      environment.systemPath = [../../scripts];
+
       fonts = {
         fontDir.enable = true;
         fonts = with pkgs; [
@@ -123,6 +128,8 @@
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
+
+      services.tailscale.enable = true;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
