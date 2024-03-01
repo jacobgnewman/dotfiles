@@ -57,7 +57,6 @@
         ];
         brews = [];
         casks = [
-          "binary-ninja"
           "firefox-developer-edition"
           "kiwix"
           "kicad"
@@ -94,6 +93,7 @@
           ripgrep
           rsync
           tmux
+          tree
           wget
           zoxide
           # --------- code/utils ---------

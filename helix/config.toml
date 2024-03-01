@@ -4,6 +4,9 @@ theme = "everforest_dark"
 auto-save = true
 auto-format=true
 rulers = [80, 120]
+cursorline = true
+line-number = "relative"
+bufferline = "multiple"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -13,8 +16,11 @@ hidden = false
 
 [editor.lsp]
 enable=true
-auto-signature-help=true
 display-messages = true
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25
 
 [editor.indent-guides]
 render = true
