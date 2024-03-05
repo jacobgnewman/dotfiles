@@ -55,7 +55,9 @@
         taps = [
           "homebrew/cask-versions"
         ];
-        brews = [];
+        brews = [
+          "openjdk"
+        ];
         casks = [
           "firefox-developer-edition"
           "kiwix"
@@ -63,6 +65,7 @@
           "raycast"
           "saleae-logic"
           "spotify"
+          "steam"
           "tunnelblick"
           "talon"
           "obs"
@@ -114,6 +117,7 @@
           texlab # latex lsp
           opam
           qemu
+          wabt
         ];
       };
 
