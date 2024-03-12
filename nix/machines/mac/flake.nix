@@ -67,6 +67,7 @@
           "tunnelblick"
           "talon"
           "obs"
+          "prusaslicer"
           "vlc"
           "zed"
         ];
@@ -123,8 +124,6 @@
           wabt
         ];
       };
-
-      environment.systemPath = [../../scripts];
 
       fonts = {
         fontDir.enable = true;
