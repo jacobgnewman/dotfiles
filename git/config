@@ -1,5 +1,7 @@
 [init]
 	defaultBranch = main
+[push]
+	autoSetupRemote = true
 [user]
 	name = jacobgnewman
 	email = 57055451+jacobgnewman@users.noreply.github.com
