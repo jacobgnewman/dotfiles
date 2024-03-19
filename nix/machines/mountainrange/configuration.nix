@@ -6,6 +6,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../services/homepage.nix
   ];
 
   # Bootloader.
@@ -32,6 +33,7 @@
       direnv
       git
       gh
+      lazygit
       helix
       python3
       tmux
@@ -74,15 +76,18 @@
   # -------- SERVICES ---------
 
   services.openssh.enable = true;
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [
+      "--ssh"
+    ];
+  };
 
   services = {
     forgejo = {
       enable = true;
-    };
-
-    homepage-dashboard = {
-      enable = true;
+      settings.server.DOMAIN = "git.mountainrose";
+      settings.server.HTTP_PORT = 3000;
     };
 
     syncthing = {
@@ -103,7 +108,7 @@
     # Use recommended settings
     recommendedGzipSettings = true;
 
-    virtualHosts."bitwarden.mountainrose.ca" = {
+    virtualHosts."vaultwarden.mountainrose.ca" = {
       enableACME = true;
       acmeRoot = null;
       forceSSL = true;
@@ -111,6 +116,7 @@
         proxyPass = "http://127.0.0.1:8000";
       };
     };
+
     virtualHosts."syncthing.mountainrose.ca" = {
       enableACME = true;
       acmeRoot = null;
@@ -120,6 +126,17 @@
       };
     };
 
+    # Forgejo Service
+    virtualHosts."git.mountainrose.ca" = {
+      enableACME = true;
+      acmeRoot = null;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3000";
+      };
+    };
+
+    # Homepage Service
     virtualHosts."mountainrose.ca" = {
       enableACME = true;
       acmeRoot = null;
