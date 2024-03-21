@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nix-darwin,
     nixpkgs,
@@ -36,6 +36,7 @@
         discord
         inkscape
         obsidian
+        ollama
         sioyek # pdf viewer
         tailscale
         utm
@@ -46,7 +47,11 @@
       # broken?
       homebrew = {
         enable = true;
-        onActivation.cleanup = "uninstall";
+        onActivation = {
+          autoUpdate = true;
+          upgrade = true;
+          cleanup = "uninstall";          
+        };
         taps = [
           "homebrew/cask-versions"
         ];
@@ -54,6 +59,7 @@
           "openjdk"
         ];
         casks = [
+          "anki"
           "arduino-ide"
           "balenaetcher"
           "firefox-developer-edition"
@@ -86,11 +92,11 @@
           btop
           eza
           fzf
+          fzf-make
           gh
           git-lfs
           jq
           lazygit
-          mold
           nmap
           ripgrep
           rsync
@@ -114,10 +120,6 @@
           typst
           typst-lsp
           tectonic # latex build system
-          # teensy stuff?
-          # avra
-          # pkgsCross.avr.buildPackages.gcc
-          # teensy-loader-cli
           texlab # latex lsp
           opam
           qemu
@@ -128,9 +130,7 @@
       fonts = {
         fontDir.enable = true;
         fonts = with pkgs; [
-          intel-one-mono
           jetbrains-mono
-          monaspace
         ];
       };
 
@@ -141,6 +141,7 @@
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
+      networking.hostName = "dusk";
 
       # system settings
       system.defaults = {
@@ -159,8 +160,6 @@
 
         NSGlobalDomain = {
           AppleShowAllExtensions = true;
-          ApplePressAndHoldEnabled = false;
-
           "com.apple.mouse.tapBehavior" = 1;
           "com.apple.sound.beep.volume" = 0.0;
           "com.apple.sound.beep.feedback" = 0;

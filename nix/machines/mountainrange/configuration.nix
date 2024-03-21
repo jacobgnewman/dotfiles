@@ -7,13 +7,13 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../services/homepage.nix
+    ../../services/forgejo.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Nix Stuff
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.hostName = "mountainrange"; # Define your hostname.
@@ -23,7 +23,6 @@
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gray = {
     isNormalUser = true;
     description = "gray";
@@ -78,8 +77,10 @@
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
+    useRoutingFeatures = "server";
     extraUpFlags = [
       "--ssh"
+      "--advertise-routes=192.168.0.0/24"
     ];
   };
 
