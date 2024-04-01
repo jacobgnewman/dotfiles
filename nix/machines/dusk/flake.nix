@@ -65,6 +65,8 @@
           "firefox-developer-edition"
           "kiwix"
           "kicad"
+          "obs"
+          "prusaslicer"
           "raycast"
           "saleae-logic"
           "spotify"
@@ -72,8 +74,6 @@
           "syncthing"
           "tunnelblick"
           "talon"
-          "obs"
-          "prusaslicer"
           "vlc"
           "zed"
         ];
@@ -87,6 +87,8 @@
           # --------- Project management ---------
           direnv
           nix-direnv
+          just
+
           # --------- Terminal Utils ---------
           bat
           btop
@@ -104,6 +106,7 @@
           tree
           wget
           zoxide
+
           # --------- code/utils ---------
           alejandra # nix code formatter
           binutils
@@ -186,13 +189,13 @@
   in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#MBP
-    darwinConfigurations."Jacobs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."dusk" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
       ];
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."MBP".pkgs;
+    darwinPackages = self.darwinConfigurations."dusk".pkgs;
   };
 }

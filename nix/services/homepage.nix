@@ -1,4 +1,15 @@
 {config, ...}: {
+
+  # Base Proxy 
+  services.nginx.virtualHosts."mountainrose.ca" = {
+    enableACME = true;
+    acmeRoot = null;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8082";
+    };
+  };
+
   services.homepage-dashboard = {
     enable = true;
 

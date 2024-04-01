@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ../../services/homepage.nix
     ../../services/forgejo.nix
+    ../../services/syncthing.nix
     ../../users/gray.nix
   ];
 
@@ -40,7 +41,6 @@
       unzip
       binutils
       gdb
-      # pwndbg
       nil
       z3
     ];
@@ -65,14 +65,6 @@
 
   virtualisation.docker.enable = true;
 
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "acme@mountainrose.ca";
-      dnsProvider = "cloudflare";
-      environmentFile = "/var/lib/secrets/cloudflare.env";
-    };
-  };
 
   # -------- SERVICES ---------
 
@@ -88,17 +80,18 @@
     ];
   };
 
-  services = {
-    syncthing = {
-      enable = true;
-      user = "gray";
-      guiAddress = "127.0.0.1:8384";
-      dataDir = "/home/gray/sync"; # Default folder for new synced folders
-      configDir = "/home/gray/.config/syncthing"; # Folder for Syncthing's settings and keys
-    };
-  };
 
   services.vaultwarden.enable = true;
+
+
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "acme@mountainrose.ca";
+      dnsProvider = "cloudflare";
+      environmentFile = "/var/lib/secrets/cloudflare.env";
+    };
+  };
 
   users.users.nginx.extraGroups = ["acme"];
   services.nginx = {
@@ -116,24 +109,6 @@
       };
     };
 
-    virtualHosts."syncthing.mountainrose.ca" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8384";
-      };
-    };
-
-    # Homepage Service
-    virtualHosts."mountainrose.ca" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8082";
-      };
-    };
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];
