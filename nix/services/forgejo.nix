@@ -1,12 +1,28 @@
-{config, ...}: {
-
+{ config, ...}: 
+let 
+  host = "git.mountainrose.ca";
+in {
   services.forgejo = {
     enable = true;
-    settings.server.DOMAIN = "git.mountainrose";
-    settings.server.HTTP_PORT = 3000;
+    lfs.enable = true;
+    
+    settings = {
+      DEFAULT.APP_NAME = "Summit Forge";
+    
+      server = {
+        DOMAIN = host;
+        LANDING_PAGE = "explore";
+        HTTP_PORT = 3000;
+        ROOT_URL = "https://${host}";
+      };
+
+      service = {
+        REQUIRE_SIGNIN_VIEW = true; # change later?
+      };
+    };
   };
-  
-  services.nginx.virtualHosts."git.mountainrose.ca" = {
+
+  services.nginx.virtualHosts."${host}" = {
     enableACME = true;
     acmeRoot = null;
     forceSSL = true;

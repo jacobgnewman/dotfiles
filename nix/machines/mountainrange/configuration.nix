@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ../../services/homepage.nix
     ../../services/forgejo.nix
+    ../../users/gray.nix
   ];
 
   # Bootloader.
@@ -39,8 +40,9 @@
       unzip
       binutils
       gdb
-      pwndbg
+      # pwndbg
       nil
+      z3
     ];
   };
 
@@ -74,10 +76,12 @@
 
   # -------- SERVICES ---------
 
+  services.ollama.enable = true;
+
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "server";
+    useRoutingFeatures = "both";
     extraUpFlags = [
       "--ssh"
       "--advertise-routes=192.168.0.0/24"
