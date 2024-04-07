@@ -25,27 +25,6 @@
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  users.users.gray = {
-    isNormalUser = true;
-    description = "gray";
-    extraGroups = ["networkmanager" "wheel" "docker"];
-    packages = with pkgs; [
-      alejandra
-      direnv
-      git
-      gh
-      lazygit
-      helix
-      python3
-      tmux
-      unzip
-      binutils
-      gdb
-      nil
-      z3
-    ];
-  };
-
   environment.variables = {
     COLORTERM = "truecolor";
   };
@@ -65,7 +44,6 @@
 
   virtualisation.docker.enable = true;
 
-
   # -------- SERVICES ---------
 
   services.ollama.enable = true;
@@ -80,9 +58,7 @@
     ];
   };
 
-
   services.vaultwarden.enable = true;
-
 
   security.acme = {
     acceptTerms = true;
@@ -108,7 +84,6 @@
         proxyPass = "http://127.0.0.1:8000";
       };
     };
-
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];

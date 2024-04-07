@@ -1,14 +1,13 @@
-{ config, ...}: 
-let 
+{config, ...}: let
   host = "git.mountainrose.ca";
 in {
   services.forgejo = {
     enable = true;
     lfs.enable = true;
-    
+
     settings = {
       DEFAULT.APP_NAME = "Summit Forge";
-    
+
       server = {
         DOMAIN = host;
         LANDING_PAGE = "explore";
@@ -30,5 +29,4 @@ in {
       proxyPass = "http://127.0.0.1:3000";
     };
   };
-
 }

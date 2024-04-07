@@ -15,7 +15,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, lix-module, lix, ... }: {
+  outputs = {
+    self,
+    nixpkgs,
+    lix-module,
+    lix,
+    ...
+  }: {
     nixosConfigurations = {
       mountainrange = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -26,6 +32,4 @@
       };
     };
   };
-
-  
 }

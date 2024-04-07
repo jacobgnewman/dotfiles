@@ -1,6 +1,5 @@
 {config, ...}: {
-
-  # Base Proxy 
+  # Base Proxy
   services.nginx.virtualHosts."mountainrose.ca" = {
     enableACME = true;
     acmeRoot = null;
@@ -34,7 +33,9 @@
               }
             ];
           }
-        ]; }{
+        ];
+      }
+      {
         nix = [
           {
             "Nixpkgs" = [
@@ -121,15 +122,23 @@
       }
     ]; # widgets
 
-
     settings = {
       title = "Home";
       background = "https://images.unsplash.com/photo-1502252430442-aac78f397426?auto=format&fit=crop&w=2560&q=80";
       headerStyle = "clean";
       layout = {
-        infra = { style = "row"; columns = 4; };
-        dev = { style = "row"; columns = 3; };
-        nix= { style = "row"; columns = 1; };
+        infra = {
+          style = "row";
+          columns = 4;
+        };
+        dev = {
+          style = "row";
+          columns = 3;
+        };
+        nix = {
+          style = "row";
+          columns = 1;
+        };
       };
     };
   };

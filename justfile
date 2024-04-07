@@ -9,4 +9,7 @@ dusk:
 mountain: 
     sudo nixos-rebuild --flake ~/dotfiles/nix/machines/mountainrange/.#mountainrange switch
 
+badger:
+    sudo nixos-rebuild --flake ~/dotfiles/nix/machines/badger/.#badger switch
+
 

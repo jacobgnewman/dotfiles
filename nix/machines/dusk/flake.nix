@@ -50,7 +50,7 @@
         onActivation = {
           autoUpdate = true;
           upgrade = true;
-          cleanup = "uninstall";          
+          cleanup = "uninstall";
         };
         taps = [
           "homebrew/cask-versions"

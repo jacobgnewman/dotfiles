@@ -1,5 +1,4 @@
 {config, ...}: {
-
   services.syncthing = {
     enable = true;
     user = "gray";
@@ -7,7 +6,7 @@
     dataDir = "/home/gray/sync"; # Default folder for new synced folders
     configDir = "/home/gray/.config/syncthing"; # Folder for Syncthing's settings and keys
   };
-  
+
   services.nginx.virtualHosts."syncthing.mountainrose.ca" = {
     enableACME = true;
     acmeRoot = null;
@@ -16,5 +15,4 @@
       proxyPass = "http://127.0.0.1:8384";
     };
   };
-
 }
