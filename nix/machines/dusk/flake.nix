@@ -63,6 +63,7 @@
           "arduino-ide"
           "balenaetcher"
           "firefox-developer-edition"
+          "godot"
           "kiwix"
           "kicad"
           "obs"
