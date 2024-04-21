@@ -42,6 +42,7 @@
         utm
         wireshark
         vscode
+        yabai
       ];
 
       # broken?
