@@ -34,6 +34,7 @@
         # For *some* apps to show up in /Applications they must be added here...
         alacritty
         discord
+        element-desktop
         inkscape
         obsidian
         ollama
@@ -43,6 +44,10 @@
         wireshark
         vscode
         yabai
+
+
+        # misc
+        elasticsearch
       ];
 
       # broken?
@@ -63,6 +68,7 @@
           "anki"
           "arduino-ide"
           "balenaetcher"
+          "docker"
           "firefox-developer-edition"
           "godot"
           "kiwix"
