@@ -19,3 +19,4 @@ Source Links:
 | [sunlight_alp_mountain](./sunlight_alp_mountain.jpg) | [unsplash](https://unsplash.com/photos/sunlight-through-alp-mountain-4yta6mU66dE) | <img src="./sunlight_alp_mountain.jpg" width="50%"> |
 | [aerial_mountain_sunset](./aerial_mountain_sunset.jpg) | [unsplash](https://unsplash.com/photos/aerial-view-of-mountains-during-sunset-8Nql6oVT_1A) | <img src="./aerial_mountain_sunset.jpg" width="50%"> |
 | [forrest_mountain_pink_sunset](./forrest_mountain_pink_sunset.jpg) | [unsplash](https://unsplash.com/photos/forest-mountain-during-sunset-z4rqGnlvqKA) | <img src="./forrest_mountain_pink_sunset.jpg" width="50%"> |
+| [mountain_cloud_gravel_road](./mountain_cloud_gravel_road.jpg) | [unsplash](https://unsplash.com/photos/gray-road-near-mountains-gHwDURuSafI) | <img src="./mountain_cloud_gravel_road.jpg" width=50%> |
