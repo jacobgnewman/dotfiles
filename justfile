@@ -6,7 +6,7 @@ fern:
     sudo nixos-rebuild switch --flake ~/dotfiles/nix/machines/fern/.#fern
 
 fern-update-flake:
-    sudo nixos flake update--flake ~/dotfiles/nix/machines/fern/.#fern
+    sudo nix flake update --flake ~/dotfiles/nix/machines/fern/.#fern
     sudo nixos-rebuild switch --flake ~/dotfiles/nix/machines/fern/.#fern
 
 dusk: 

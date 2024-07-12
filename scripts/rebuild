@@ -1,9 +1,13 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 set -e
-pushd ~/dotfiles/nix/mac
+pushd ~/dotfiles/nix
 hx flake.nix
 alejandra . &>/dev/null
 git diff -U0 *.nix
-darwin-rebuild switch --flake ~/dotfiles/nix/mac
+echo "NixOS Rebuilding..."
+sudo nixos-rebuild switch --flake ~/dotfiles/nix/machines/fern/.#fern &>nixos-switch.log || (
+ cat nixos-switch.log | grep --color error && false)
+gen=$(nixos-rebuild list-generations | grep current)
+git commit -am "$gen"
 popd

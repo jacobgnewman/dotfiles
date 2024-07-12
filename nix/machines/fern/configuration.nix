@@ -1,11 +1,12 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./sway.nix # desktop
     ../../users/gray.nix
   ];
 
@@ -13,33 +14,27 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-boot.kernelModules = [
-  "v4l2loopback"
-];
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+  boot.kernelModules = [
+    "v4l2loopback"
+  ];
 
-  # Set initial kernel module settings
   # nix settings
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Framework stuff, supposed wifi speed?
+  # Framework stuff, supposedly improves wifi speed?
   hardware.wirelessRegulatoryDatabase = true;
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom="CA"
-    # https://github.com/umlaeute/v4l2loopback
-    # options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
   '';
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   # desktop config
-  services.xserver.enable = true; # x11 
+  services.xserver.enable = true; # x11
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    xwayland.enable = true;
-  };
 
   hardware.bluetooth = {
     enable = true;
@@ -47,28 +42,20 @@ boot.kernelModules = [
   };
   services.blueman.enable = true;
 
-  programs.yazi = {
-		enable = true;
-	};
-
   programs.nix-ld.enable = true;
 
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # general applications
     alacritty
-    kicad-small
+    pkgs-stable.kicad-small
     obsidian
     obs-studio
     podman-desktop
     sioyek
     vesktop
-
-    # sway/wayland
-    slurp # selection window
-    grim # screenshot
-    wl-clipboard # clipboard cli
-    xdg-desktop-portal # screen sharing
-    xdg-desktop-portal-wlr # screen sharing
 
     chromium
 
@@ -85,17 +72,12 @@ boot.kernelModules = [
     zoxide
     ueberzugpp
 
-    # desktop utils
-    brightnessctl
-    # sov
-    waybar
-
     # CTF
     nmap
-    binwalk
+    # binwalk
     wireshark
     ghidra
-    imhex
+    pkgs-stable.imhex
 
     # sw dev
     avra
@@ -103,7 +85,6 @@ boot.kernelModules = [
     llvm
     libclang
     gmp
-
   ];
 
   fonts.packages = with pkgs; [
@@ -133,12 +114,12 @@ boot.kernelModules = [
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   networking.hostName = "fern";
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    unmanaged = ["tailscale0"];
+  };
 
   # services.automatic-timezoned.enable = true;
   time.timeZone = "America/Vancouver";

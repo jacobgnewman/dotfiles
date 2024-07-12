@@ -45,7 +45,6 @@
         vscode
         yabai
 
-
         # misc
         elasticsearch
       ];
