@@ -14,12 +14,14 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu exec alacritty --title "sway-launcher" -e bash -c "dmenu_path | fzf | xargs swaymsg exec"
+# for_window [app_id="app_sel"] floating enable
+
 
 ### Output configuration
 #
 # Default wallpaper 
-output * bg ../../dotfiles/backgrounds/mountain_far.jpg fill
+output * bg /home/gray/dotfiles/backgrounds/aerial_mountain_sunset.jpg fill
 #
 # Example configuration:
 #
@@ -80,6 +82,10 @@ output eDP-1 resolution 2256x1504 position 0,0 scale 1
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+
+    # Take a screen shot
+    bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
 #
 # Moving around:
 #

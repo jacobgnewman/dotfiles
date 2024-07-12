@@ -1,4 +1,5 @@
-theme = "everforest_dark"
+# theme = "everforest_dark"
+theme = "ferra"
 
 [editor]
 auto-save = true
