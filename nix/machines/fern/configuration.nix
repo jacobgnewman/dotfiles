@@ -23,20 +23,42 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  networking.wireless.enable = true;
-  networking.wireless.userControlled.enable = true;
+  # networking settings
+  networking = {
+    hostName = "fern";
+
+    wireless.userControlled.enable = true;
+
+    networkmanager = {
+      enable = true;
+      unmanaged = ["tailscale0"];
+    };
+  };
+
+
+  
   # Framework stuff, supposedly improves wifi speed?
   hardware.wirelessRegulatoryDatabase = true;
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom="CA"
   '';
 
-  systemd.services.NetworkManager-wait-online.enable = false;
+  # firmware updates
+  services.fwupd.enable = true;
+
 
   # desktop config
   services.xserver.enable = true; # x11
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        user = "greeter";
+      };
+    };
+  };
+  # services.desktopManager.plasma6.enable = true;
 
   hardware.bluetooth = {
     enable = true;
@@ -48,6 +70,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   programs.fish.enable = true;
   users.users.gray.shell = pkgs.fish;
@@ -68,6 +91,7 @@
     chromium
 
     wineWowPackages.waylandFull
+
 
     # framework
     easyeffects # app to install audio config
@@ -134,11 +158,6 @@
     pulse.enable = true;
   };
 
-  networking.hostName = "fern";
-  networking.networkmanager = {
-    enable = true;
-    unmanaged = ["tailscale0"];
-  };
 
   # services.automatic-timezoned.enable = true;
   time.timeZone = "America/Vancouver";

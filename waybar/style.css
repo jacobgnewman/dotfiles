@@ -134,8 +134,12 @@ window#waybar.empty {
 }
 
 #window {
+	padding-left: 8pt;
+	padding-right: 8pt;
 	margin-right: 15pt;
 	margin-left: 15pt;
+	background: @surface;
+	color: @iris;
 }
 
 #pulseaudio {

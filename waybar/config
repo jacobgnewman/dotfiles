@@ -5,7 +5,9 @@
 	"modules-left": [
 		"sway/mode",
 		"sway/workspaces",
-		"custom/arrow10",
+	],
+
+	"modules-center": [
 		"sway/window"
 	],
 
@@ -46,8 +48,8 @@
 	},
 
 	"clock#time": {
-		"interval": 10,
-		"format": "{:%H:%M}",
+		"interval": 1,
+		"format": "{:%H:%M:%S}",
 		"tooltip": false
 	},
 
@@ -102,7 +104,7 @@
 
 	"sway/window": {
 		"format": "{}",
-		"max-length": 30,
+		"max-length": 50,
 		"tooltip": false
 	},
 
