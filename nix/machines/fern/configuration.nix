@@ -23,7 +23,6 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-
   networking.wireless.enable = true;
   networking.wireless.userControlled.enable = true;
   # Framework stuff, supposedly improves wifi speed?

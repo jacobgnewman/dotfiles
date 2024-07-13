@@ -13,7 +13,7 @@
   };
 
   # let user modify brightness & volume
-  users.users.gray.extraGroups = [ "video" ];
+  users.users.gray.extraGroups = ["video"];
   programs.light.enable = true;
 
   # let gnome-keyring manage secrets
@@ -29,5 +29,6 @@
     xdg-desktop-portal-wlr # screen sharing?
     brightnessctl # modify display brightness
     waybar # top bar config
+    wf-recorder # screen recording
   ];
 }
