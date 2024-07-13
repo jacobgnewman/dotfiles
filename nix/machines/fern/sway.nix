@@ -12,6 +12,10 @@
     enable = true;
   };
 
+  # let user modify brightness & volume
+  users.users.gray.extraGroups = [ "video" ];
+  programs.light.enable = true;
+
   # let gnome-keyring manage secrets
   services.gnome.gnome-keyring.enable = true;
 

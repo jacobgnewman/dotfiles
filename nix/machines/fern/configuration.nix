@@ -23,6 +23,9 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+
+  networking.wireless.enable = true;
+  networking.wireless.userControlled.enable = true;
   # Framework stuff, supposedly improves wifi speed?
   hardware.wirelessRegulatoryDatabase = true;
   boot.extraModprobeConfig = ''
@@ -47,6 +50,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  programs.fish.enable = true;
+  users.users.gray.shell = pkgs.fish;
+
   environment.systemPackages = with pkgs; [
     # general applications
     alacritty
@@ -56,10 +62,24 @@
     podman-desktop
     sioyek
     vesktop
+    hotspot
+
+    linuxPackages_latest.perf
 
     chromium
 
     wineWowPackages.waylandFull
+
+    # framework
+    easyeffects # app to install audio config
+
+    # fish
+    fishPlugins.done
+    fishPlugins.fzf-fish
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fishPlugins.grc
+    grc
 
     # Term stuff
     ffmpegthumbnailer
