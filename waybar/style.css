@@ -35,7 +35,7 @@
 
 /* The whole bar */
 #waybar {
-	background: rgba(0, 0, 0, 0);
+	background: @base;
 	color: @white;
 	font-family: JetBrains Mono, Siji;
 	font-size: 10pt;
@@ -47,7 +47,7 @@ window#waybar {
 }
 
 window#waybar.empty {
-	background-color: transparent
+	background: @base;
 }
 
 /* Each module */
@@ -138,7 +138,7 @@ window#waybar.empty {
 	padding-right: 8pt;
 	margin-right: 15pt;
 	margin-left: 15pt;
-	background: @surface;
+	background: @base;
 	color: @iris;
 }
 

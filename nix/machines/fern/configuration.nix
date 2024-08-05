@@ -7,8 +7,14 @@
   imports = [
     ./hardware-configuration.nix
     ./sway.nix # desktop
+    ./framework.nix
     ../../users/gray.nix
+    ../../roles/ctf
   ];
+
+  # nix settings
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -19,46 +25,16 @@
     "v4l2loopback"
   ];
 
-  # nix settings
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   # networking settings
   networking = {
     hostName = "fern";
 
     wireless.userControlled.enable = true;
-
     networkmanager = {
       enable = true;
       unmanaged = ["tailscale0"];
     };
   };
-
-
-  
-  # Framework stuff, supposedly improves wifi speed?
-  hardware.wirelessRegulatoryDatabase = true;
-  boot.extraModprobeConfig = ''
-    options cfg80211 ieee80211_regdom="CA"
-  '';
-
-  # firmware updates
-  services.fwupd.enable = true;
-
-
-  # desktop config
-  services.xserver.enable = true; # x11
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-        user = "greeter";
-      };
-    };
-  };
-  # services.desktopManager.plasma6.enable = true;
 
   hardware.bluetooth = {
     enable = true;
@@ -75,26 +51,42 @@
   programs.fish.enable = true;
   users.users.gray.shell = pkgs.fish;
 
+  # gnome
+  services.gvfs.enable = true;
+
+  programs.ssh.startAgent = true;
+
   environment.systemPackages = with pkgs; [
     # general applications
-    alacritty
-    pkgs-stable.kicad-small
-    obsidian
-    obs-studio
-    podman-desktop
-    sioyek
-    vesktop
-    hotspot
+    alacritty # terminal emulator
+    anki # spaced repition
+    blender # 3d modeling
+    blueberry
+    gimp
+    inkscape # Vector graphics
+    kiwix
+    pkgs-stable.kicad-small # PCB design
+    obsidian # note taking
+    obs-studio # screen recording / streaming
+    prusa-slicer
+    seahorse # keyring
+    sioyek # pdf viewer
+    vesktop # discord client wayland
+    vscode.fhs
 
-    linuxPackages_latest.perf
+    ncspot
+
+    # networking
+    openvpn
+
+    # profiling workloads
+    linuxPackages_latest.perf # profiler
+    flamegraph # chart generator
+    hotspot # gui
 
     chromium
 
     wineWowPackages.waylandFull
-
-
-    # framework
-    easyeffects # app to install audio config
 
     # fish
     fishPlugins.done
@@ -102,6 +94,7 @@
     fishPlugins.forgit
     fishPlugins.hydro
     fishPlugins.grc
+    # ( import ../../packages/fish-zoxide.nix {})
     grc
 
     # Term stuff
@@ -113,28 +106,29 @@
     ripgrep
     fzf
     zoxide
+    zellij
     ueberzugpp
-
-    # CTF
-    nmap
-    # binwalk
-    wireshark
-    ghidra
-    pkgs-stable.imhex
 
     # sw dev
     avra
     avrdude
     llvm
     libclang
+    llvmPackages.bintools
+    mold
+    mold-wrapped
+    pkgs-stable.sage
+    clang
     gmp
+    rustup
   ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
     font-awesome
     fira-code
     fira-code-symbols
+    jetbrains-mono
+    nerdfonts
   ];
 
   hardware.graphics = {
@@ -148,18 +142,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-
   # services.automatic-timezoned.enable = true;
+  # time.timeZone = "America/Vancouver";
+  # `timedatectl list-timezones` or `timedatectl set-timezone C`
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
   services.xserver.xkb = {

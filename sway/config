@@ -4,6 +4,9 @@
 exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+# notifications
+exec mako
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -35,13 +38,10 @@ output * bg /home/gray/dotfiles/backgrounds/framework-background.jpg fill
 output eDP-1 resolution 2256x1504 position 0,0 scale 1
 
 ### Idle configuration
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
- exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
-          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f -c 000000'
+# exec swayidle -w \
+      # timeout 300 'swaylock -f -e -i /home/gray/dotfiles/backgrounds/framework-back-cnc.png' \
+      # timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+      # before-sleep 'swaylock -f -e -c 000000'
 
 ### Input configuration
 #
@@ -80,6 +80,10 @@ bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
 
     # Start your launcher
     bindsym $mod+d exec $menu
+
+    # alt+tab esque workflow
+    bindsym $mod+tab workspace next_on_output 
+    bindsym $mod+Shift+tab workspace prev_on_output 
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
