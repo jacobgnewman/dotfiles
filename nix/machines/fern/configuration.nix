@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./sway.nix # desktop
+    ./kde.nix
     ./framework.nix
     ../../users/gray.nix
     ../../roles/ctf
@@ -56,15 +57,15 @@
 
   programs.ssh.startAgent = true;
 
+  services.ollama.enable = true;
+
   environment.systemPackages = with pkgs; [
     # general applications
     alacritty # terminal emulator
     anki # spaced repition
     blender # 3d modeling
-    blueberry
     gimp
     inkscape # Vector graphics
-    kiwix
     pkgs-stable.kicad-small # PCB design
     obsidian # note taking
     obs-studio # screen recording / streaming
@@ -107,9 +108,12 @@
     fzf
     zoxide
     zellij
-    ueberzugpp
+    # ueberzugpp
 
     # sw dev
+    gcc
+    gmp
+    gmpxx
     avra
     avrdude
     llvm
@@ -120,6 +124,7 @@
     pkgs-stable.sage
     clang
     gmp
+    google-cloud-sdk
     rustup
   ];
 

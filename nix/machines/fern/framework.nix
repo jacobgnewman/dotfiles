@@ -8,7 +8,7 @@
   '';
 
   environment.systemPackages = with pkgs; [
-    easyeffects # app to install audio config
+    # easyeffects # app to install audio config
   ];
 
   # firmware updates

@@ -101,6 +101,10 @@ bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
 
     # Take a screen shot
     bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
+
+    # lock screen
+    bindsym $mod+Shift+p exec swaylock -f -e -i /home/gray/dotfiles/backgrounds/framework-back-cnc.png
+
 #
 # Moving around:
 #

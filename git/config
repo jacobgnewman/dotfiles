@@ -7,7 +7,7 @@
 	email = 57055451+jacobgnewman@users.noreply.github.com
 [credential "https://github.com"]
 	helper = 
-	helper = !gh auth git-credential
+	helper = !/etc/profiles/per-user/gray/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !gh auth git-credential
+	helper = !/etc/profiles/per-user/gray/bin/gh auth git-credential

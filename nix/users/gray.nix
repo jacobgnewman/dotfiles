@@ -10,21 +10,26 @@
       description = "gray";
       extraGroups = ["networkmanager" "wheel" "docker"];
       packages = with pkgs; [
+        # text editors
+        neovim
+        helix
+
+        # terminal utilities
+        tmux
         alejandra
         btop
         bat
+        binutils
         direnv
         git
         gh
         just
         lazygit
-        helix
         python3
-        tmux
         unzip
-        binutils
         gdb
         nil
+        zip
       ];
 
       openssh.authorizedKeys.keys = [
