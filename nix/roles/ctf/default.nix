@@ -5,7 +5,9 @@
 }: {
   environment.systemPackages = with pkgs; [
     nmap
+    nasm
     binwalk
+    burpsuite
     wireshark
     wabt
     ghidra

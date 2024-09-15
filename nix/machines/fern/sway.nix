@@ -9,27 +9,6 @@
     '';
   };
 
-  # Login Manager
-  services.xserver.enable = true; # x11
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-        user = "greeter";
-      };
-    };
-  };
-
-  # Audio Config
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # file browser
   programs.yazi = {
@@ -40,17 +19,7 @@
   users.users.gray.extraGroups = ["video"];
   programs.light.enable = true;
 
-  # let gnome-keyring manage secrets
-  services.gnome.gnome-keyring.enable = true;
-
-  # why is screen sharing hard
   xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-kde
-    ];
-
     wlr = {
       enable = true;
       settings = {

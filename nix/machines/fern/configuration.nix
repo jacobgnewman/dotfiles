@@ -4,10 +4,11 @@
   pkgs-stable,
   ...
 }: {
+
   imports = [
     ./hardware-configuration.nix
-    ./sway.nix # desktop
-    ./kde.nix
+    # ./sway.nix # old desktop
+    ./kde.nix # 
     ./framework.nix
     ../../users/gray.nix
     ../../roles/ctf
@@ -16,78 +17,111 @@
   # nix settings
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Clear /tmp 
+  boot.tmp.cleanOnBoot = true;
+  # faster dbus
+  services.dbus.implementation = "broker";
+  # faster rebuild-switch
+  system.switch = {
+    enable = false;
+    enableNg = true;
+  };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
-  boot.kernelModules = [
-    "v4l2loopback"
-  ];
+  # System Time & localization
+  # `timedatectl list-timezones` or `timedatectl set-timezone C`
+  time.timeZone = "America/Vancouver";
+  i18n.defaultLocale = "en_CA.UTF-8";
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # Login Manager
+  services.xserver.enable = true; # x11
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Audio Config
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # networking settings
   networking = {
     hostName = "fern";
-
     wireless.userControlled.enable = true;
     networkmanager = {
+      # wifi.backend = "iwd"; # seems broken on UBC wifi :(
       enable = true;
       unmanaged = ["tailscale0"];
     };
   };
+  # stop boot from delaying for no reason...
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-  services.blueman.enable = true;
 
   programs.nix-ld.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-  services.power-profiles-daemon.enable = true;
 
+  # user shell things
   programs.fish.enable = true;
-  users.users.gray.shell = pkgs.fish;
+  programs.xonsh.enable = true;
+  users.users.gray.shell = pkgs.xonsh;
 
-  # gnome
-  services.gvfs.enable = true;
 
   programs.ssh.startAgent = true;
 
-  services.ollama.enable = true;
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   environment.systemPackages = with pkgs; [
-    # general applications
-    alacritty # terminal emulator
-    anki # spaced repition
-    blender # 3d modeling
-    gimp
-    inkscape # Vector graphics
+    # GUI Apps
+    alacritty               # terminal emulator
+    anki                    # spaced repition
+    blender                 # 3d modeling
+    chromium                # terrible browser
+    gimp                    # Image editor
+    halloy                  # IRC client
+    inkscape                # Vector graphics
     pkgs-stable.kicad-small # PCB design
-    obsidian # note taking
-    obs-studio # screen recording / streaming
-    prusa-slicer
-    seahorse # keyring
-    sioyek # pdf viewer
-    vesktop # discord client wayland
-    vscode.fhs
+    obsidian                # note taking
+    obs-studio              # screen recording & streaming
+    prusa-slicer            # 3D model Slicer
+    sioyek                  # pdf viewer
+    thunderbird             # email client
+    vesktop                 # discord client wayland
+    vscode.fhs              # Vscode editor unwrapped?
+    zed-editor              # zed, faster version of ^
 
-    ncspot
+    # bahished zone
+    # zoom-us # :<
 
-    # networking
-    openvpn
 
     # profiling workloads
     linuxPackages_latest.perf # profiler
     flamegraph # chart generator
     hotspot # gui
 
-    chromium
-
-    wineWowPackages.waylandFull
 
     # fish
     fishPlugins.done
@@ -95,37 +129,63 @@
     fishPlugins.forgit
     fishPlugins.hydro
     fishPlugins.grc
-    # ( import ../../packages/fish-zoxide.nix {})
     grc
 
-    # Term stuff
-    ffmpegthumbnailer
-    unar
-    jq
-    poppler
-    fd
-    ripgrep
-    fzf
-    zoxide
-    zellij
-    # ueberzugpp
+    # Terminal utilities
+    emacs                       # I don't know how to use this... lol
+    fzf                         # fuzzy finder
+    fd                          # nice find alternative with better defaults
+    google-cloud-sdk            # GCP TUI controller
+    jq                          # cmdline json parser
+    jujutsu                     # git compat VCS
+    kubectl                     # kubernetes CLI
+    llvmPackages.bintools       # binary utilities
+    openvpn                     # VPN util
+    ripgrep                     # fast grep
+    wl-clipboard                # clipboard cli interface
+    wineWowPackages.waylandFull # wine emulation layer for windows bin's
+    zoxide                      # improved z
 
-    # sw dev
+
+    # Programming Language Lib's & Stuff
+
+    # C & Friends
     gcc
+    llvm
+    clang
+
+    # Erlang
+    erlang
+    erlang-ls
+
+    # Haskell
+    haskell.compiler.ghc910
+    haskell-language-server
+    cabal-install
+
+    # Prolog
+    swiProlog
+
+    # Python
+    python312Full
+    python312Packages.pip
+
+    # Racket
+    racket
+
+    # Rust
+    rustup
+
+    # Sagemath
+    pkgs-stable.sage
+
+    # sw libraries
+    libclang
     gmp
     gmpxx
-    avra
-    avrdude
-    llvm
-    libclang
-    llvmPackages.bintools
-    mold
+    mold # faster linker
     mold-wrapped
-    pkgs-stable.sage
-    clang
-    gmp
-    google-cloud-sdk
-    rustup
+    ffmpeg
   ];
 
   fonts.packages = with pkgs; [
@@ -134,6 +194,7 @@
     fira-code-symbols
     jetbrains-mono
     nerdfonts
+    departure-mono
   ];
 
   hardware.graphics = {
@@ -144,18 +205,7 @@
     enable = true;
   };
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # services.automatic-timezoned.enable = true;
-  # time.timeZone = "America/Vancouver";
-  # `timedatectl list-timezones` or `timedatectl set-timezone C`
-  time.timeZone = "America/Vancouver";
-  i18n.defaultLocale = "en_CA.UTF-8";
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   security.sudo.wheelNeedsPassword = false;
 

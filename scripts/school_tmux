@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Start a new tmux session called "classes"
+tmux new-session -d -s classes
+
+# Create new windows for each class
+tmux rename-window -t classes:0 'cpsc311'
+tmux new-window -t classes:1 -n 'cpsc312'
+tmux new-window -t classes:2 -n 'cpsc418'
+
+# Attach to the tmux session
+tmux attach-session -t classes
+

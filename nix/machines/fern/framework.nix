@@ -11,6 +11,15 @@
     # easyeffects # app to install audio config
   ];
 
+  hardware.sensor.iio.enable = true;
+
+
+  # Set powermode of cpu
+  services.power-profiles-daemon.enable = true;
+
+  # fingerprint sensor
+  services.fprintd.enable = true;
+
   # firmware updates
   services.fwupd.enable = true;
 }

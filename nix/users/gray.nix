@@ -25,7 +25,7 @@
         gh
         just
         lazygit
-        python3
+        # python3
         unzip
         gdb
         nil
@@ -38,4 +38,5 @@
       ];
     };
   };
+
 }
