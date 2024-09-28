@@ -14,6 +14,7 @@
     ../../roles/ctf
   ];
 
+
   # nix settings
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -85,13 +86,17 @@
   # user shell things
   programs.fish.enable = true;
   programs.xonsh.enable = true;
-  users.users.gray.shell = pkgs.xonsh;
+  users.users.gray.shell = pkgs.fish;
 
 
   programs.ssh.startAgent = true;
 
-  environment.sessionVariables = {
-    EDITOR = "nvim";
+  # environment.sessionVariables = {
+  #   EDITOR = "nvim";
+  # };
+
+  services.emacs = {
+    enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -103,9 +108,10 @@
     gimp                    # Image editor
     halloy                  # IRC client
     inkscape                # Vector graphics
-    pkgs-stable.kicad-small # PCB design
+    neovide                 # neovim gui
     obsidian                # note taking
     obs-studio              # screen recording & streaming
+    pkgs-stable.kicad-small # PCB design
     prusa-slicer            # 3D model Slicer
     sioyek                  # pdf viewer
     thunderbird             # email client
@@ -114,8 +120,10 @@
     zed-editor              # zed, faster version of ^
 
     # bahished zone
-    # zoom-us # :<
+    zoom-us # :<
 
+    # School networking
+    openconnect_openssl
 
     # profiling workloads
     linuxPackages_latest.perf # profiler
@@ -128,11 +136,13 @@
     fishPlugins.fzf-fish
     fishPlugins.forgit
     fishPlugins.hydro
+    fishPlugins.z
     fishPlugins.grc
     grc
 
     # Terminal utilities
-    emacs                       # I don't know how to use this... lol
+    coreutils
+    # emacsGcc                    # I don't know how to use this... lol
     fzf                         # fuzzy finder
     fd                          # nice find alternative with better defaults
     google-cloud-sdk            # GCP TUI controller
@@ -159,9 +169,14 @@
     erlang-ls
 
     # Haskell
-    haskell.compiler.ghc910
+    # haskell.compiler.ghc910
+    ghc
     haskell-language-server
     cabal-install
+
+    # Latex
+    tectonic
+    
 
     # Prolog
     swiProlog
@@ -179,6 +194,9 @@
     # Sagemath
     pkgs-stable.sage
 
+    # Typst
+    typst
+    
     # sw libraries
     libclang
     gmp
@@ -186,7 +204,10 @@
     mold # faster linker
     mold-wrapped
     ffmpeg
+    zlib
   ];
+
+  
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -211,6 +232,11 @@
 
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = ["gray"];
+  
+  
 
   programs.firefox.enable = true;
 

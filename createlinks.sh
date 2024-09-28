@@ -40,8 +40,9 @@ link_config_dir alacritty ~/.config/alacritty
 link_config_dir helix ~/.config/helix
 link_config_dir git ~/.config/git
 link_config_dir tmux ~/.config/tmux
-link_config_dir sway ~/.config/sway
-link_config_dir waybar ~/.config/waybar
+# link_config_dir sway ~/.config/sway
+# link_config_dir waybar ~/.config/waybar
+link_config_dir emacs ~/.config/emacs
 
 link_file bash/bashrc ~/.bashrc
 link_file ssh/config ~/.ssh/config
