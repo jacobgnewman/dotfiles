@@ -95,7 +95,7 @@
     neovide                 # neovim gui
     obsidian                # note taking
     obs-studio              # screen recording & streaming
-    pkgs-stable.kicad-small # PCB design
+    #pkgs-stable.kicad-small # PCB design
     prusa-slicer            # 3D model Slicer
     sioyek                  # pdf viewer
     thunderbird             # email client
@@ -176,7 +176,7 @@
     rustup
 
     # Sagemath
-    pkgs-stable.sage
+    #pkgs-stable.sage
 
     # Typst
     typst
