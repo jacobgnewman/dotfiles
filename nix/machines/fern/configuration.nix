@@ -18,6 +18,19 @@
   # nix settings
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [
+      { hostName = "badger";
+        system = "x86_64-linux";
+        maxJobs = 100;
+        supportedFeatures = [ "benchmark" "big-parallel" ];
+      }
+    ];
+  };
+
+  
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -67,7 +80,7 @@
     hostName = "fern";
     wireless.userControlled.enable = true;
     networkmanager = {
-      # wifi.backend = "iwd"; # seems broken on UBC wifi :(
+      wifi.backend = "iwd"; # seems broken on UBC wifi :(
       enable = true;
       unmanaged = ["tailscale0"];
     };
@@ -108,6 +121,7 @@
     gimp                    # Image editor
     halloy                  # IRC client
     inkscape                # Vector graphics
+    krita                   # oss painting platform
     neovide                 # neovim gui
     obsidian                # note taking
     obs-studio              # screen recording & streaming
@@ -120,8 +134,8 @@
     zed-editor              # zed, faster version of ^
 
     # bahished zone
-    zoom-us # :<
-
+    zoom-us
+    
     # School networking
     openconnect_openssl
 
@@ -140,9 +154,13 @@
     fishPlugins.grc
     grc
 
+    # UGH
+    p7zip
+
     # Terminal utilities
     coreutils
-    # emacsGcc                    # I don't know how to use this... lol
+    dust                        # better graphical du
+    lazydocker                  # TUI for docker stuff
     fzf                         # fuzzy finder
     fd                          # nice find alternative with better defaults
     google-cloud-sdk            # GCP TUI controller
@@ -151,9 +169,11 @@
     kubectl                     # kubernetes CLI
     llvmPackages.bintools       # binary utilities
     openvpn                     # VPN util
+    postgresql 
     ripgrep                     # fast grep
     wl-clipboard                # clipboard cli interface
-    wineWowPackages.waylandFull # wine emulation layer for windows bin's
+    # wineWowPackages.waylandFull # wine emulation layer for windows bin's
+    wineWowPackages.unstableFull # wine emulation layer for windows bin's
     zoxide                      # improved z
 
 
@@ -163,6 +183,9 @@
     gcc
     llvm
     clang
+
+    # Debugger tools
+    rr
 
     # Erlang
     erlang
@@ -177,7 +200,6 @@
     # Latex
     tectonic
     
-
     # Prolog
     swiProlog
 
@@ -189,7 +211,7 @@
     racket
 
     # Rust
-    rustup
+    # rustup
 
     # Sagemath
     pkgs-stable.sage
@@ -198,18 +220,20 @@
     typst
     
     # sw libraries
-    libclang
+    ffmpeg
     gmp
     gmpxx
+    libclang
     mold # faster linker
     mold-wrapped
-    ffmpeg
+    pkg-config
     zlib
   ];
 
   
 
   fonts.packages = with pkgs; [
+    alegreya
     font-awesome
     fira-code
     fira-code-symbols
