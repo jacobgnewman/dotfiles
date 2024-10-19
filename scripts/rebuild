@@ -2,7 +2,7 @@
 
 set -e
 pushd ~/dotfiles/nix
-hx flake.nix
+hx machines/fern/configuration.nix
 alejandra . &>/dev/null
 git diff -U0 *.nix
 echo "NixOS Rebuilding..."

@@ -13,7 +13,6 @@
 
   hardware.sensor.iio.enable = true;
 
-
   # Set powermode of cpu
   services.power-profiles-daemon.enable = true;
 

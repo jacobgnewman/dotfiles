@@ -1,1 +1,7 @@
 NoHostAuthenticationForLocalhost yes
+
+Host csserver
+    HostName remote.students.cs.ubc.ca
+    User jacobn87
+    IdentityFile ~/.ssh/id_rsa  # Replace with the path to your private key if you're using key-based authentication
+    PasswordAuthentication yes

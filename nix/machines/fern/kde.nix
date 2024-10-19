@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-
   services.desktopManager.plasma6.enable = true;
 
   # why is screen sharing hard
@@ -24,6 +23,4 @@
   environment.systemPackages = with pkgs.kdePackages; [
     filelight
   ];
-
-
 }

@@ -6,8 +6,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../services/homepage.nix
-    ../../services/forgejo.nix
+    # ../../services/homepage.nix
+    # ../../services/forgejo.nix
     ../../services/syncthing.nix
     ../../users/gray.nix
   ];
@@ -31,7 +31,6 @@
 
   # save some typing :)
   security.sudo.wheelNeedsPassword = false;
-
   environment.systemPackages = with pkgs; [
     nginx
     vim
@@ -45,8 +44,6 @@
   virtualisation.docker.enable = true;
 
   # -------- SERVICES ---------
-
-  services.ollama.enable = true;
 
   services.openssh.enable = true;
   services.tailscale = {

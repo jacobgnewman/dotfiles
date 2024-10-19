@@ -9,7 +9,6 @@
     '';
   };
 
-
   # file browser
   programs.yazi = {
     enable = true;
