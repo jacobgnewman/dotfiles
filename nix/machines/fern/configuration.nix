@@ -193,8 +193,9 @@
     # Haskell
     # haskell.compiler.ghc910
     ghc
+    stack
     haskell-language-server
-    cabal-install
+    # cabal-install
 
     # Latex
     tectonic
