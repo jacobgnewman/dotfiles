@@ -38,7 +38,10 @@
       wget
       tree
     ];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOlBcrO5Tyq8ESc6uavW7Lnq4IWEC+YyG5KIAfn7r85"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOlBcrO5Tyq8ESc6uavW7Lnq4IWEC+YyG5KIAfn7r85"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILF9GkipwZHZxHQiE8HG+bSbjjpEOs31Uclakm8d7CTW"
+    ];
   };
 
   security.sudo.wheelNeedsPassword = false;
@@ -49,6 +52,9 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
   ];
+  
+  # services
+  services.cloudflared.enable = true;
 
   services.openssh.enable = true;
   services.tailscale.enable = true;

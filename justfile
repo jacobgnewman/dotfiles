@@ -18,6 +18,9 @@ dusk:
 ember:
     sudo nixos-rebuild switch -I nixos-config=~/dotfiles/nix/machines/ember/configuration.nix
 
+cedar:
+    sudo nixos-rebuild switch -I nixos-config=/home/gray/dotfiles/nix/machines/cedar/configuration.nix
+
 # rebuild mountainrange
 mountain: 
     sudo nixos-rebuild --flake ~/dotfiles/nix/machines/mountainrange/.#mountainrange switch
