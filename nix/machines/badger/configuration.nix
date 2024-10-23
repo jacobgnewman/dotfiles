@@ -62,23 +62,13 @@
   networking.networkmanager.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
-
   programs.nix-ld.enable = true;
+
+  users.users.gray.shell = pkgs.fish;
 
   # user shell things
   programs.fish.enable = true;
-  programs.xonsh.enable = true;
-  users.users.gray.shell = pkgs.fish;
-
   programs.ssh.startAgent = true;
-
-  # environment.sessionVariables = {
-  #   EDITOR = "nvim";
-  # };
-
-  services.emacs = {
-    enable = true;
-  };
 
   environment.systemPackages = with pkgs; [
     # GUI Apps
@@ -99,12 +89,6 @@
     vesktop # discord client wayland
     vscode.fhs # Vscode editor unwrapped?
     zed-editor # zed, faster version of ^
-
-    # bahished zone
-    zoom-us # :<
-
-    # School networking
-    openconnect_openssl
 
     # profiling workloads
     linuxPackages_latest.perf # profiler
@@ -183,6 +167,11 @@
     mold-wrapped
     ffmpeg
     zlib
+
+    # tests
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
   ];
 
   fonts.packages = with pkgs; [
@@ -202,7 +191,6 @@
     enable = true;
   };
 
-  services.printing.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
   virtualisation.virtualbox.host.enable = true;
@@ -213,6 +201,9 @@
 
   services.openssh.enable = true;
   services.tailscale.enable = true;
+
+  # Services
+  services.jellyfin.enable = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
