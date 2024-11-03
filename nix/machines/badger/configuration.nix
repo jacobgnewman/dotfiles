@@ -7,7 +7,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../users/gray.nix
-    ../../roles/ctf
+    # ../../roles/ctf
     ../../roles/desktop
     ../../roles/dev
     ../../roles/general
