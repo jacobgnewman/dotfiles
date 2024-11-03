@@ -17,12 +17,19 @@
     erlang
     erlang-ls
 
+    # go
+    go
+
     # Haskell
     # haskell.compiler.ghc910
     ghc
     stack
     haskell-language-server
     # cabal-install
+
+    # javascript
+    nodejs_22
+    deno
 
     # Latex
     tectonic

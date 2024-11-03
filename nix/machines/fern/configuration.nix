@@ -12,8 +12,10 @@
     ../../roles/desktop
     ../../roles/dev
     ../../roles/general
+    ../../roles/terminal
   ];
 
+  # run builds on badger to speed up builds and conserve *FAN NOISE*
   nix = {
     distributedBuilds = true;
     buildMachines = [
@@ -26,12 +28,13 @@
     ];
   };
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # System Time & localization
   # `timedatectl list-timezones` or `timedatectl set-timezone C`
+  # time.timeZone = "America/Vancouver";
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
   services.xserver.xkb = {
@@ -60,9 +63,6 @@
 
   programs.nix-ld.enable = true;
 
-  # user shell things
-  programs.fish.enable = true;
-
   services.gnome.gnome-keyring.enable = true;
 
   environment.sessionVariables = {
@@ -74,6 +74,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    toybox
     # School networking
     openconnect_openssl
 
@@ -81,50 +82,6 @@
     linuxPackages_latest.perf # profiler
     flamegraph # chart generator
     hotspot # gui
-
-    # fish
-    fishPlugins.done
-    fishPlugins.pure
-    fishPlugins.fzf-fish
-    fishPlugins.forgit
-    fishPlugins.hydro
-    fishPlugins.z
-    fishPlugins.grc
-    grc
-
-    # UGH
-    p7zip
-
-    # Terminal utilities
-    coreutils
-    dust # better graphical du
-    lazydocker # TUI for docker stuff
-    fzf # fuzzy finder
-    fd # nice find alternative with better defaults
-    google-cloud-sdk # GCP TUI controller
-    impala
-    jq # cmdline json parser
-    jujutsu # git compat VCS
-    kubectl # kubernetes CLI
-    llvmPackages.bintools # binary utilities
-    ncspot
-    openvpn # VPN util
-    postgresql
-    ripgrep # fast grep
-    wl-clipboard # clipboard cli interface
-    wineWowPackages.unstableFull # wine emulation layer for windows bin's
-    zoxide # improved z
-
-    # Programming Language Lib's & Stuff
-  ];
-
-  fonts.packages = with pkgs; [
-    alegreya
-    font-awesome
-    jetbrains-mono
-    (nerdfonts.override {fonts = ["FiraCode"];})
-    departure-mono
-    # (import ./../../pkgs/lilex)
   ];
 
   services.syncthing = {
@@ -140,8 +97,6 @@
   programs.steam = {
     enable = true;
   };
-
-  services.printing.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 

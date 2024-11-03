@@ -7,7 +7,13 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../users/gray.nix
-    ../fern/kde.nix
+    # ../fern/kde.nix
+    ../../users/gray.nix
+    ../../roles/ctf
+    ../../roles/desktop
+    ../../roles/dev
+    ../../roles/general
+    ../../roles/terminal
   ];
 
   # nix settings
@@ -35,28 +41,6 @@
     variant = "";
   };
 
-  # Login Manager
-  services.xserver.enable = true; # x11
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
-        user = "greeter";
-      };
-    };
-  };
-
-  # Audio Config
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # networking settings
   networking.hostName = "badger"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -64,123 +48,13 @@
   security.sudo.wheelNeedsPassword = false;
   programs.nix-ld.enable = true;
 
-  users.users.gray.shell = pkgs.fish;
-
-  # user shell things
-  programs.fish.enable = true;
   programs.ssh.startAgent = true;
 
   environment.systemPackages = with pkgs; [
-    # GUI Apps
-    alacritty # terminal emulator
-    anki # spaced repition
-    blender # 3d modeling
-    chromium # terrible browser
-    gimp # Image editor
-    halloy # IRC client
-    inkscape # Vector graphics
-    neovide # neovim gui
-    obsidian # note taking
-    obs-studio # screen recording & streaming
-    #pkgs-stable.kicad-small # PCB design
-    prusa-slicer # 3D model Slicer
-    sioyek # pdf viewer
-    thunderbird # email client
-    vesktop # discord client wayland
-    vscode.fhs # Vscode editor unwrapped?
-    zed-editor # zed, faster version of ^
-
-    # profiling workloads
-    linuxPackages_latest.perf # profiler
-    flamegraph # chart generator
-    hotspot # gui
-
-    # fish
-    fishPlugins.done
-    fishPlugins.fzf-fish
-    fishPlugins.forgit
-    fishPlugins.hydro
-    fishPlugins.z
-    fishPlugins.grc
-    grc
-
-    # Terminal utilities
-    coreutils
-    # emacsGcc                    # I don't know how to use this... lol
-    fzf # fuzzy finder
-    fd # nice find alternative with better defaults
-    google-cloud-sdk # GCP TUI controller
-    jq # cmdline json parser
-    jujutsu # git compat VCS
-    kubectl # kubernetes CLI
-    llvmPackages.bintools # binary utilities
-    openvpn # VPN util
-    ripgrep # fast grep
-    wl-clipboard # clipboard cli interface
-    wineWowPackages.waylandFull # wine emulation layer for windows bin's
-    zoxide # improved z
-
-    # Programming Language Lib's & Stuff
-
-    # C & Friends
-    gcc
-    llvm
-    clang
-
-    # Erlang
-    erlang
-    erlang-ls
-
-    # Haskell
-    # haskell.compiler.ghc910
-    ghc
-    haskell-language-server
-    cabal-install
-
-    # Latex
-    tectonic
-
-    # Prolog
-    swiProlog
-
-    # Python
-    python312Full
-    python312Packages.pip
-
-    # Racket
-    racket
-
-    # Rust
-    rustup
-
-    # Sagemath
-    #pkgs-stable.sage
-
-    # Typst
-    typst
-
-    # sw libraries
-    libclang
-    gmp
-    gmpxx
-    mold # faster linker
-    mold-wrapped
-    ffmpeg
-    zlib
-
     # tests
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
-  ];
-
-  fonts.packages = with pkgs; [
-    font-awesome
-    fira-code
-    fira-code-symbols
-    jetbrains-mono
-    nerdfonts
-    departure-mono
   ];
 
   hardware.graphics = {
