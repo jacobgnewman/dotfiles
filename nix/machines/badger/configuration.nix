@@ -7,8 +7,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../users/gray.nix
-    # ../fern/kde.nix
-    ../../users/gray.nix
     ../../roles/ctf
     ../../roles/desktop
     ../../roles/dev
@@ -67,17 +65,23 @@
 
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = ["gray"];
 
   programs.firefox.enable = true;
 
-  services.openssh.enable = true;
-  services.tailscale.enable = true;
 
   # Services
+
   services.jellyfin.enable = true;
+
+  services.openssh.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    user = "gray";
+    dataDir = "/home/gray/";
+  };
+
+  services.tailscale.enable = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
