@@ -20,7 +20,7 @@
     lix-module,
   }: {
     nixosConfigurations = {
-      badger = nixpkgs.lib.nixosSystem {
+      badger = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         
         # pass non-default nixpkgs to other modules
@@ -33,6 +33,7 @@
 
         modules = [
           ./configuration.nix
+          lix-module.nixosModules.default
         ];
       };
     };
