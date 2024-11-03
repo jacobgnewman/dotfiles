@@ -74,7 +74,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    toybox
+    # toybox
     # School networking
     openconnect_openssl
 
