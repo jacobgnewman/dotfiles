@@ -12,7 +12,7 @@
     wabt
     ghidra
     pwndbg
-    pkgs-stable.imhex
+    imhex
     (qt6Packages.callPackage ./binja {})
   ];
 }

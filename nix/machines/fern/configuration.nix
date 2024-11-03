@@ -79,9 +79,9 @@
     openconnect_openssl
 
     # profiling workloads
-    linuxPackages_latest.perf # profiler
-    flamegraph # chart generator
-    hotspot # gui
+    # linuxPackages_latest.perf # profiler
+    # flamegraph # chart generator
+    # hotspot # gui
   ];
 
   services.syncthing = {
