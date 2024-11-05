@@ -47,7 +47,7 @@
     hostName = "fern";
     wireless.userControlled.enable = true;
     networkmanager = {
-      # wifi.backend = "iwd"; # seems broken on UBC wifi :(
+      wifi.backend = "iwd"; # seems broken on UBC wifi :(
       enable = true;
       unmanaged = ["tailscale0"];
     };

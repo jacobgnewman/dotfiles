@@ -34,6 +34,9 @@
     # Latex
     tectonic
 
+    # Lua
+    lua
+
     # Prolog
     swi-prolog
 

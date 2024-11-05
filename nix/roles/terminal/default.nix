@@ -14,6 +14,7 @@
     coreutils
     dust # better graphical du
     lazydocker # TUI for docker stuff
+    file
     fzf # fuzzy finder
     fd # nice find alternative with better defaults
     google-cloud-sdk # GCP TUI controller
