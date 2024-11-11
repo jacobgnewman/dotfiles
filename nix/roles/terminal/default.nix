@@ -12,6 +12,7 @@
     bat
     btop
     bore-cli # NAT tunneling
+    binutils
     coreutils
     direnv
     dust # better graphical du
@@ -29,7 +30,9 @@
     openvpn # VPN util
     postgresql
     ripgrep # fast grep
+    unzip
     wireguard-tools
     zoxide # improved z
+    zip
   ];
 }

@@ -39,8 +39,10 @@
           # applications
           # anki
           alacritty
-          obsidian
           imhex
+          # sioyek
+          obsidian
+
 
           # dev
           # rust

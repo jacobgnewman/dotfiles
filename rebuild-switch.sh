@@ -5,6 +5,10 @@ function rebuild_dusk {
   darwin-rebuild switch --flake ~/dotfiles/nix/machines/dusk/.#dusk
 }
 
+function rebuild_ember {
+  sudo nixos-rebuild switch -I nixos-config=./nix/machines/ember/configuration.nix
+}
+
 function rebuild_fern {
   sudo nixos-rebuild switch --flake ~/dotfiles/nix/machines/fern/.#fern
 }
@@ -24,6 +28,9 @@ case "$hostname" in
   ;;
 "dusk")
   rebuild_dusk
+  ;;
+"ember")
+  rebuild_ember
   ;;
 "fern")
   rebuild_fern
