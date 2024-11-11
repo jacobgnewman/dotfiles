@@ -1,17 +1,12 @@
 {
   description = "Mountainrange Flake; Internal Big boi";
   inputs = {
-    # nixpkgs = {
-    #   url = "github:NixOS/nixpkgs/nixos-unstable";
-    # };
-    lix = {
-      url = "git+ssh://git@git.lix.systems/lix-project/lix";
-      flake = false;
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     lix-module = {
-      url = "git+ssh://git@git.lix.systems/lix-project/nixos-module";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.lix.follows = "lix";
     };
   };
 
@@ -19,7 +14,6 @@
     self,
     nixpkgs,
     lix-module,
-    lix,
     ...
   }: {
     nixosConfigurations = {
