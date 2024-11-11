@@ -1,34 +1,11 @@
-
-
-hostname := `hostname`
-
 default:
     @echo "what do you want to do?"
 
-fern:
-    sudo nixos-rebuild switch --flake ~/dotfiles/nix/machines/fern/.#fern
+# rebuild nix config & switch
+rs:
+  ./rebuild-switch.sh
 
-fern-use-badger:
-    sudo nixos-rebuild switch --flake ~/dotfiles/nix/machines/fern/.#fern --no-build-nix --build-host "badger"
-
-fern-update-flake:
-    cd nix/machines/fern && sudo nix flake update
-
-dusk: 
-    darwin-rebuild switch --flake ~/dotfiles/nix/machines/dusk/.#dusk
-
-ember:
-    sudo nixos-rebuild switch -I nixos-config=~/dotfiles/nix/machines/ember/configuration.nix
-
-cedar:
-    sudo nixos-rebuild switch -I nixos-config=/home/gray/dotfiles/nix/machines/cedar/configuration.nix
-
-mountain: 
-    sudo nixos-rebuild --flake ~/dotfiles/nix/machines/mountainrange/.#mountainrange switch
-
-badger:
-    sudo nixos-rebuild --flake ~/dotfiles/nix/machines/badger/.#badger switch
-
+# clear nix store
 clean-nix:
     sudo nix-collect-garbage -d
 

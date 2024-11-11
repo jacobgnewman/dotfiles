@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -51,7 +50,7 @@
     # rustup
 
     # Sagemath
-    pkgs-stable.sage
+    sage
 
     # Typst
     typst

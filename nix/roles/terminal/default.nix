@@ -14,11 +14,11 @@
     coreutils
     dust # better graphical du
     lazydocker # TUI for docker stuff
+    lazygit # TUI git
     file
     fzf # fuzzy finder
     fd # nice find alternative with better defaults
     google-cloud-sdk # GCP TUI controller
-    impala
     jq # cmdline json parser
     jujutsu # git compat VCS
     kubectl # kubernetes CLI
@@ -27,8 +27,8 @@
     openvpn # VPN util
     postgresql
     ripgrep # fast grep
-    wl-clipboard # clipboard cli interface
-    wineWowPackages.unstableFull # wine emulation layer for windows bin's
+    # wl-clipboard # clipboard cli interface
+    # wineWowPackages.unstableFull # wine emulation layer for windows bin's
     wireguard-tools
     zoxide # improved z
   ];

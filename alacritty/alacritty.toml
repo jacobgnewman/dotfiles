@@ -1,6 +1,8 @@
-import = ["~/.config/alacritty/ashes_dark.toml"]
 [env]
 TERM = "xterm-256color"
 
 [font]
-normal = {family = "Departure Mono"}
+normal = {family = "Lilex Nerd Font Mono"}
+
+[general]
+import = ["~/.config/alacritty/ashes_dark.toml"]
