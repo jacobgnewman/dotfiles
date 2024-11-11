@@ -13,7 +13,7 @@ function rebuild_badger {
 }
 
 function rebuild_mountain {
-  sudo nixos-rebuild --flake ~/dotfiles/nix/machines/mountainrange/.#mountainrange switch
+  sudo nixos-rebuild --flake ~/dotfiles/nix/machines/mountain/.#mountain switch
 }
 
 hostname=$(hostname)

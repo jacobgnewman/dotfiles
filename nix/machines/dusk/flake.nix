@@ -51,6 +51,7 @@
 
           # nix
           alejandra
+          nil
 
           # prolog
           swi-prolog

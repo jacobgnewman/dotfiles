@@ -22,5 +22,6 @@
 
   environment.systemPackages = with pkgs.kdePackages; [
     filelight
+    wl-clipboard # clipboard cli interface
   ];
 }

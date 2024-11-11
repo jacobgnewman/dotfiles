@@ -9,9 +9,11 @@
 
   environment.systemPackages = with pkgs; [
     atuin # sync'd shell history
-    #utilities
+    bat
+    btop
     bore-cli # NAT tunneling
     coreutils
+    direnv
     dust # better graphical du
     lazydocker # TUI for docker stuff
     lazygit # TUI git
@@ -27,8 +29,6 @@
     openvpn # VPN util
     postgresql
     ripgrep # fast grep
-    # wl-clipboard # clipboard cli interface
-    # wineWowPackages.unstableFull # wine emulation layer for windows bin's
     wireguard-tools
     zoxide # improved z
   ];
