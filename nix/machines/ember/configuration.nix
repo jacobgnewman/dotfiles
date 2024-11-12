@@ -35,8 +35,14 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    tmux
     cloudflared
   ];
+
+  # TODO: setup properly...
+  # services.cloudflared = {
+  #     enable = true;
+  # }
 
   virtualisation.docker.enable = true;
 

@@ -11,7 +11,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, lix-module  }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, lix-module }:
   let
     configuration = { pkgs, ... }: {
 

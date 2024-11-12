@@ -13,7 +13,6 @@
     btop
     bore-cli # NAT tunneling
     binutils
-    coreutils
     direnv
     dust # better graphical du
     lazydocker # TUI for docker stuff
@@ -25,7 +24,6 @@
     jq # cmdline json parser
     jujutsu # git compat VCS
     kubectl # kubernetes CLI
-    llvmPackages.bintools # binary utilities
     ncspot
     openvpn # VPN util
     postgresql
