@@ -6,8 +6,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ../../services/forgejo.nix
-    ../../services/syncthing.nix
     ../../users/gray.nix
     ../../roles/terminal
   ];
@@ -58,6 +56,14 @@
       PasswordAuthentication = false;
       PermitRootLogin = "no";
     };
+  };
+
+  services.syncthing = {
+    enable = true;
+    user = "gray";
+    guiAddress = "127.0.0.1:8384";
+    dataDir = "/home/gray/sync"; # Default folder for new synced folders
+    configDir = "/home/gray/.config/syncthing"; # Folder for Syncthing's settings and keys
   };
 
   services.tailscale = {

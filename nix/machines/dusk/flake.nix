@@ -40,6 +40,7 @@
           # anki
           alacritty
           imhex
+          zoom-us
           # sioyek
           obsidian
 

@@ -24,9 +24,10 @@
     jq # cmdline json parser
     jujutsu # git compat VCS
     kubectl # kubernetes CLI
+    litecli # sqlite cli
     ncspot
     openvpn # VPN util
-    postgresql
+    pgcli
     ripgrep # fast grep
     unzip
     wireguard-tools
