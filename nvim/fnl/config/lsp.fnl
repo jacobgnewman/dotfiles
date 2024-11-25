@@ -33,6 +33,8 @@
                        :settings {:fennel {:workspace {:library (vim.api.nvim_list_runtime_paths)}
                                            :diagnostics {:globals [:vim]}}}}})
 
+(lspconfig.fennel_language_server.setup [])
+
 (lspconfig.racket_langserver.setup {})
 
 (local cmp (require :cmp))

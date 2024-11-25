@@ -1,23 +1,6 @@
 (local lazy (require :lazy))
 
-(lazy.setup {:spec [{1 :nvim-telescope/telescope.nvim
-                     :tag :0.1.8
-                     :dependencies [:nvim-lua/plenary.nvim]}
-                    {1 :nvim-neo-tree/neo-tree.nvim
-                     :branch :v3.x
-                     :dependencies [:nvim-lua/plenary.nvim
-                                    :nvim-tree/nvim-web-devicons
-                                    :MunifTanjim/nui.nvim]}
-                    {1 :folke/snacks.nvim
-                     :priority 1000
-                     :lazy false
-                     :opts {:bigfile {:enabled true}
-                            :dashboard {:enabled true}
-                            ;:notifier {:enabled true}
-                            :quickfile {:enabled true}
-                            :statuscolumn {:enabled true}
-                            :words {:enabled true}}}
-                    {1 :neovim/nvim-lspconfig}
+(lazy.setup {:spec [{1 :neovim/nvim-lspconfig}
                     {1 :hrsh7th/cmp-nvim-lsp}
                     {1 :hrsh7th/nvim-cmp}
                     {1 :Olical/nfnl :ft :fennel}
