@@ -29,6 +29,7 @@
     openvpn # VPN util
     pgcli
     ripgrep # fast grep
+    pdfgrep
     unzip
     wireguard-tools
     zoxide # improved z

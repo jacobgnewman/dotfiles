@@ -40,12 +40,24 @@
           # anki
           alacritty
           imhex
-          zoom-us
+          # halloy
           # sioyek
           obsidian
-
+          zed-editor
+          zoom-us
 
           # dev
+          # erlang
+          erlang
+          erlang-ls
+
+	  # fennel
+	  luajitPackages.fennel
+	  fnlfmt
+
+          # racket
+          # racket
+
           # rust
           rustup
 
@@ -58,6 +70,10 @@
 
           # prolog
           swi-prolog
+
+          # typst
+          typst
+
       ];
 
       fonts.packages = with pkgs; [
