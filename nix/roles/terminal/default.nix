@@ -28,6 +28,8 @@
     ncspot
     openvpn # VPN util
     pgcli
+    postgresql
+    pdfgrep # what it says on the tin
     ripgrep # fast grep
     pdfgrep
     unzip
