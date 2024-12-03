@@ -1,14 +1,3 @@
-(macro sparse [...]
-  (let [args [...]
-        t {}]
-    (for [i 1 (length args) 2]
-      (let [key (. args i)
-            val (. args (+ i 1))]
-        (if (= key `&i)
-            (table.insert t val)
-            (tset t key val))))
-    t))
-
 [{1 :nvim-telescope/telescope.nvim
   :tag :0.1.8
   :dependencies [:nvim-lua/plenary.nvim]}

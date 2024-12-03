@@ -5,6 +5,7 @@
               (configs.setup {:ensure_installed [:c
                                                  :lua
                                                  :fennel
+                                                 :racket
                                                  :javascript
                                                  :html
                                                  :python]

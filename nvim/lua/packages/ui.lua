@@ -1,2 +1,2 @@
 -- [nfnl] Compiled from packages/ui.fnl by https://github.com/Olical/nfnl, do not edit.
-return {{"folke/which-key.nvim", opts = {}}}
+return {{"nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = {"nvim-lua/plenary.nvim"}}, {"nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = {"nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim"}}, {"folke/snacks.nvim", priority = 1000, opts = {bigfile = {enabled = true}, dashboard = {enabled = true}, notifier = {enabled = true}, quickfile = {enabled = true}, statuscolumn = {enabled = true}, terminal = {enabled = true}, words = {enabled = true}}, lazy = false}, {"folke/which-key.nvim", event = "VeryLazy", opts = {}}}
