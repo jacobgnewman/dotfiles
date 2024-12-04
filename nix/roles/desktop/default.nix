@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   ...
 }: {
   # Desktop Environment
@@ -47,13 +46,14 @@
     neovide # neovim gui
     obsidian # note taking
     obs-studio # screen recording & streaming
-    pkgs-stable.kicad-small # PCB design
+    kicad-small # PCB design
     prusa-slicer # 3D model Slicer
     saleae-logic-2 # aaaa
     sioyek # pdf viewer
     thunderbird # email client
     vesktop # discord client wayland
     vscode.fhs # Vscode editor unwrapped?
+    vlc
     zed-editor # zed, faster version of ^
   ];
 
@@ -61,7 +61,6 @@
     alegreya
     font-awesome
     jetbrains-mono
-    (nerdfonts.override {fonts = ["FiraCode"];})
     departure-mono
     # (import ./../../pkgs/lilex)
   ];

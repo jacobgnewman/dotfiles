@@ -7,6 +7,7 @@
                     {1 :echasnovski/mini.nvim :version false}
                     {1 :Olical/nfnl :ft :fennel}
                     {1 :atweiden/vim-fennel}
+                    {1 :ggandor/lightspeed.nvim}
                     ;; {1 :gpanders/nvim-parinfer}
                     {1 :stevearc/conform.nvim
                      :opts {:format_on_save {:timeout_ms 500

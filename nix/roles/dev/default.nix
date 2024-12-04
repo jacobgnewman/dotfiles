@@ -36,6 +36,10 @@
     # Lua
     lua
 
+    # fennel
+    fennel-ls
+    fnlfmt
+
     # Prolog
     swi-prolog
 

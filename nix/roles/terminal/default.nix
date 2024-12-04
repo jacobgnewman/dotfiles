@@ -12,7 +12,7 @@
     bat
     btop
     bore-cli # NAT tunneling
-    binutils
+    # binutils
     direnv
     dust # better graphical du
     lazydocker # TUI for docker stuff

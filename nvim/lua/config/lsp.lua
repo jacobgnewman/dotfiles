@@ -1,9 +1,6 @@
 -- [nfnl] Compiled from config/lsp.fnl by https://github.com/Olical/nfnl, do not edit.
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspconfig = require("lspconfig")
 local lspconfig_configs = require("lspconfig.configs")
-local lspconfig_defaults = lspconfig.util.default_config
-lspconfig_defaults.capabilities = vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, cmp_nvim_lsp.default_capabilities())
 local function lsp_callback(event)
   local opts = {buffer = event.buf}
   vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
@@ -18,17 +15,14 @@ local function lsp_callback(event)
   return vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 end
 vim.api.nvim_create_autocmd("LspAttach", {desc = "LSP actions", callback = lsp_callback})
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig_configs.fennel_language_server = {default_config = {cmd = {"fennel-language-server"}, filetypes = {"fennel"}, single_file_support = true, root_dir = lspconfig.util.root_pattern("fnl"), settings = {fennel = {workspace = {library = vim.api.nvim_list_runtime_paths()}, diagnostics = {globals = {"vim"}}}}}}
 lspconfig.fennel_language_server.setup({})
-lspconfig.hls.setup({})
-lspconfig.nil_ls.setup({})
-lspconfig.pylsp.setup({})
-lspconfig.racket_langserver.setup({})
-lspconfig.rust_analyzer.setup({settings = {["rust-analyzer"] = {diagnostics = {enable = true}}}})
+lspconfig.rust_analyzer.setup({capabilities = capabilities, settings = {["rust-analyzer"] = {diagnostics = {enable = true}}}})
 lspconfig.astro.setup({cmd = {"astro-ls", "--stdio"}, filetypes = {"astro"}, root_dir = lspconfig.util.root_pattern("package.json", ".git")})
 local cmp = require("cmp")
 local function _1_(args)
-  _G.assert((nil ~= args), "Missing argument args on /Users/gray/.config/nvim/fnl/config/lsp.fnl:67")
+  _G.assert((nil ~= args), "Missing argument args on /home/gray/dotfiles/nvim/fnl/config/lsp.fnl:82")
   return vim.snippet.expand(args.body)
 end
 return cmp.setup({sources = {name = "nvim_lsp"}, snippet = {expand = _1_}, mapping = cmp.mapping.preset.insert({})})

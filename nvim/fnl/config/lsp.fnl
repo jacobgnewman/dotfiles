@@ -1,11 +1,5 @@
-(local cmp_nvim_lsp (require :cmp_nvim_lsp))
 (local lspconfig (require :lspconfig))
 (local lspconfig-configs (require :lspconfig.configs))
-(local lspconfig_defaults lspconfig.util.default_config)
-
-(set lspconfig_defaults.capabilities
-     (vim.tbl_deep_extend :force lspconfig_defaults.capabilities
-                          (cmp_nvim_lsp.default_capabilities)))
 
 (fn lsp_callback [event]
   (let [opts {:buffer event.buf}]
@@ -24,7 +18,9 @@
 (vim.api.nvim_create_autocmd :LspAttach
                              {:desc "LSP actions" :callback lsp_callback})
 
+(local capabilities ((. (require :cmp_nvim_lsp) :default_capabilities)))
 ;; FENNEL
+;; (lspconfig.fennel_ls.setup {})
 (set lspconfig-configs.fennel_language_server
      {:default_config {:cmd [:fennel-language-server]
                        :filetypes [:fennel]
@@ -36,23 +32,42 @@
 
 (lspconfig.fennel_language_server.setup {})
 
+;; (local lspconfig (require :lspconfig))
+
+; (macro setup-servers [servers]
+;   (for 
+;     `(do
+;
+;        ,(unpack (map (fn [server]
+;                        `(lspconfig.(,server).setup {}))
+;                      servers)))))
+;
+; ;; Using the macro
+; (setup-servers
+;   [hls ;; Haskell
+;    nil_ls ;; Nix
+;    pylsp ;; Python
+;    racket_langserver ;; Racket
+;   ])
+
 ;; Haskell
 
-(lspconfig.hls.setup {})
-
-;; MARKDOWN
-
-;; Nix
-(lspconfig.nil_ls.setup {})
-
-;; PYTHON
-(lspconfig.pylsp.setup {})
-
-;; RACKET 
-(lspconfig.racket_langserver.setup {})
+; (lspconfig.hls.setup {})
+;
+; ;; MARKDOWN
+;
+; ;; Nix
+; (lspconfig.nil_ls.setup {})
+;
+; ;; PYTHON
+; (lspconfig.pylsp.setup {})
+;
+; ;; RACKET 
+; (lspconfig.racket_langserver.setup {})
 
 ;; Rust
-(lspconfig.rust_analyzer.setup {:settings {:rust-analyzer {:diagnostics {:enable true}}}})
+(lspconfig.rust_analyzer.setup {: capabilities
+                                :settings {:rust-analyzer {:diagnostics {:enable true}}}})
 
 ;; WEB :(
 
@@ -66,3 +81,32 @@
 (cmp.setup {:sources {:name :nvim_lsp}
             :snippet {:expand (lambda [args] (vim.snippet.expand args.body))}
             :mapping (cmp.mapping.preset.insert {})})
+
+; (use :neovim/nvim-lspconfig)
+; (use :hrsh7th/nvim-cmp)
+; (use :hrsh7th/cmp-nvim-lsp)
+; (use :saadparwaiz1/cmp_luasnip)
+; (use :L3MON4D3/LuaSnip)
+
+; (local cmp (require :cmp))
+; (cmp.setup {:mapping (cmp.mapping.preset.insert {:<C-Space> (cmp.mapping.complete)
+;                                                  :<C-d> (cmp.mapping.scroll_docs 4)
+;                                                  :<C-u> (cmp.mapping.scroll_docs (- 4))
+;                                                  :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Replace
+;                                                                              :select true})
+;                                                  :<S-Tab> (cmp.mapping (fn [fallback]
+;                                                                          (if (cmp.visible)
+;                                                                              (cmp.select_prev_item)
+;                                                                              (luasnip.jumpable (- 1))
+;                                                                              (luasnip.jump (- 1))
+;                                                                              (fallback)))
+;                                                                        [:i :s])
+;                                                  :<Tab> (cmp.mapping (fn [fallback]
+;                                                                        (if (cmp.visible)
+;                                                                            (cmp.select_next_item)
+;                                                                            (luasnip.expand_or_jumpable)
+;                                                                            (luasnip.expand_or_jump)
+;                                                                            (fallback)))
+;                                                                      [:i :s])})
+;             ;;:snippet {:expand (fn [args] (luasnip.lsp_expand args.body))}
+;             :sources [{:name :nvim_lsp}]})

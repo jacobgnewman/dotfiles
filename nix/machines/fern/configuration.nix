@@ -16,17 +16,17 @@
   ];
 
   # run builds on badger to speed up builds and conserve *FAN NOISE*
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "badger";
-        system = "x86_64-linux";
-        maxJobs = 100;
-        supportedFeatures = ["benchmark" "big-parallel"];
-      }
-    ];
-  };
+  # nix = {
+  #   distributedBuilds = true;
+  #   buildMachines = [
+  #     {
+  #       hostName = "badger";
+  #       system = "x86_64-linux";
+  #       maxJobs = 100;
+  #       supportedFeatures = ["benchmark" "big-parallel"];
+  #     }
+  #   ];
+  # };
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -69,14 +69,10 @@
     EDITOR = "nvim";
   };
 
-  services.emacs = {
-    enable = true;
-  };
-
   environment.systemPackages = with pkgs; [
     # toybox
     # School networking
-    openconnect_openssl
+    # openconnect_openssl
 
     # profiling workloads
     # linuxPackages_latest.perf # profiler
@@ -90,10 +86,10 @@
     dataDir = "/home/gray/";
   };
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  # hardware.graphics = {
+  #   enable = true;
+  #   enable32Bit = true;
+  # };
   programs.steam = {
     enable = true;
   };
@@ -101,9 +97,9 @@
   security.sudo.wheelNeedsPassword = false;
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = ["gray"];
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # users.extraGroups.vboxusers.members = ["gray"];
 
   programs.firefox.enable = true;
 
