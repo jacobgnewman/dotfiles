@@ -12,8 +12,11 @@
 (local mini-ai (require :mini.ai))
 (mini-ai.setup)
 
+((. (require :leap) :create_default_mappings))
+((. (require :bufferline) :setup))
+
 (_G.vim.lsp.inlay_hint.enable true)
 
 (set _G.vim.g.conjure#client#fennel#aniseed#deprecation_warning false)
 
-(_G.vim.cmd "colorscheme habamax")
+(_G.vim.cmd "colorscheme tokyonight")

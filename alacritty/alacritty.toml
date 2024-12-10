@@ -6,4 +6,4 @@ TERM = "xterm-256color"
 normal = { family = "Lilex" }
 
 [general]
-import = ["~/.config/alacritty/ashes_dark.toml"]
+import = ["~/.config/alacritty/vesper.toml"]

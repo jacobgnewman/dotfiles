@@ -51,6 +51,7 @@
       enable = true;
       unmanaged = ["tailscale0"];
     };
+    # wireless.iwd.package = pkgs-stable.iwd;
   };
 
   # stop boot from delaying for no reason...
@@ -59,6 +60,7 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    #package = pkgs-stable.bluez;
   };
 
   programs.nix-ld.enable = true;

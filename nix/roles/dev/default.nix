@@ -40,12 +40,16 @@
     fennel-ls
     fnlfmt
 
+    # nix
+    nil
+
     # Prolog
     swi-prolog
 
     # Python
     python312Full
     python312Packages.pip
+    pyright
 
     # Racket
     racket
@@ -54,10 +58,11 @@
     # rustup
 
     # Sagemath
-    sage
+    # sage
 
     # Typst
     typst
+    tinymist 
 
     # sw libraries
     ffmpeg

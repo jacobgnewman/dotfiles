@@ -19,7 +19,7 @@
 (set vim.opt.timeoutlen 300)
 
 ;; Highlight stuff properly
-(set vim.opt.cursorline true)
+; (set vim.opt.cursorline true)
 
 ;; TAB HOLY WAR
 (set vim.opt.tabstop 2)

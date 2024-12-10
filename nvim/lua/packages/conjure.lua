@@ -5,4 +5,4 @@ local function _1_()
   table.insert(config.sources, {name = "conjure"})
   return cmp.setup(config)
 end
-return {{"Olical/conjure", dependencies = {"PaterJason/cmp-conjure"}, ft = {"clojure", "fennel", "python", "racket"}, lazy = true}, {"PaterJason/cmp-conjure", lazy = true, config = _1_}}
+return {{"Olical/conjure", dependencies = {"PaterJason/cmp-conjure"}, ft = {"clojure", "fennel", "python", "racket", "rust"}, lazy = true}, {"PaterJason/cmp-conjure", lazy = true, config = _1_}}

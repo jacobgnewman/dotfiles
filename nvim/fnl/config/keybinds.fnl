@@ -41,6 +41,20 @@
 (keybind [:n :x] :<Up> "v:count == 0 ? 'gk' : 'k'"
          {:desc :Up :expr true :silent true})
 
+;; Window controls
+;; TODO: bind <leader>w to stuff
+
+;; File controls
+(keybind :n :<leader>fn :<cmd>enew<cr> {:desc "New File"})
+(keybind :n :<leader>ff
+         "<cmd>:lua Snacks.dashboard.pick('files', {cwd = vim.fn.getcwd()})<cr>"
+         {:desc "Search cwd"})
+
+;(keybind :n :<leader>cf {})
+
+(keybind :n :<leader>fn :<cmd>enew<cr> {:desc "New File"})
+(keybind :n :<leader>fn :<cmd>enew<cr> {:desc "New File"})
+
 ;; move to window using ctrl+hjkl
 (keybind :n :<C-h> :<C-w>h {:desc "Go to Left Window" :remap true})
 (keybind :n :<C-j> :<C-w>j {:desc "Go to Lower Window" :remap true})
@@ -72,6 +86,24 @@
 ;; better indenting
 (keybind :v "<" :<gv {})
 (keybind :v ">" :>gv {})
+
+;; open nvim config
+;; pick('files', {cwd = vim.fn.stdpath('config')}
+(keybind :n :<leader>cf
+         "<cmd>:lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})<cr>"
+         {})
+
+;; Window Jazz?
+(keybind :n :<leader>w :<c-w> {:desc :Windows :remap true})
+(keybind :n :<leader>- :<C-W>s {:desc "Split Window Below" :remap true})
+(keybind :n :<leader>| :<C-W>v {:desc "Split Window Right" :remap true})
+(keybind :n :<leader>wd :<C-W>c {:desc "Delete Window" :remap true})
+
+;; MISC
+(keybind :n :<leader>qq :<cmd>qall<cr> {:desc "Quit All" :remap true})
+
+;; LSP
+; (keybind :n :<leader>cr ""
 
 ;; terminal
 ; (local Snacks (require :snacks))

@@ -6,7 +6,9 @@
                                                  :lua
                                                  :fennel
                                                  :racket
+                                                 :rust
                                                  :javascript
+                                                 :typst
                                                  :html
                                                  :python]
                               :sync_install false

@@ -30,19 +30,8 @@
                        :settings {:fennel {:workspace {:library (vim.api.nvim_list_runtime_paths)}
                                            :diagnostics {:globals [:vim]}}}}})
 
-(lspconfig.fennel_language_server.setup {})
+(lspconfig.fennel_language_server.setup {: capabilities})
 
-;; (local lspconfig (require :lspconfig))
-
-; (macro setup-servers [servers]
-;   (for 
-;     `(do
-;
-;        ,(unpack (map (fn [server]
-;                        `(lspconfig.(,server).setup {}))
-;                      servers)))))
-;
-; ;; Using the macro
 ; (setup-servers
 ;   [hls ;; Haskell
 ;    nil_ls ;; Nix
@@ -50,20 +39,19 @@
 ;    racket_langserver ;; Racket
 ;   ])
 
-;; Haskell
+(lspconfig.erlangls.setup {: capabilities})
 
-; (lspconfig.hls.setup {})
-;
-; ;; MARKDOWN
-;
-; ;; Nix
-; (lspconfig.nil_ls.setup {})
-;
-; ;; PYTHON
-; (lspconfig.pylsp.setup {})
-;
-; ;; RACKET 
-; (lspconfig.racket_langserver.setup {})
+;; Typst
+(lspconfig.tinymist.setup {: capabilities})
+
+;; Nix
+(lspconfig.nil_ls.setup {: capabilities})
+
+;; PYTHON
+(lspconfig.pylsp.setup {: capabilities})
+
+;; RACKET 
+(lspconfig.racket_langserver.setup {: capabilities})
 
 ;; Rust
 (lspconfig.rust_analyzer.setup {: capabilities
@@ -71,7 +59,8 @@
 
 ;; WEB :(
 
-(lspconfig.astro.setup {:cmd [:astro-ls :--stdio]
+(lspconfig.astro.setup {: capabilities
+                        :cmd [:astro-ls :--stdio]
                         :filetypes [:astro]
                         :root_dir (lspconfig.util.root_pattern :package.json
                                                                :.git)})
@@ -81,6 +70,20 @@
 (cmp.setup {:sources {:name :nvim_lsp}
             :snippet {:expand (lambda [args] (vim.snippet.expand args.body))}
             :mapping (cmp.mapping.preset.insert {})})
+
+(cmp.setup {:mapping (cmp.mapping.preset.insert {:<C-Space> (cmp.mapping.complete)
+                                                 :<C-b> (cmp.mapping.scroll_docs (- 4))
+                                                 :<C-e> (cmp.mapping.abort)
+                                                 :<C-f> (cmp.mapping.scroll_docs 4)
+                                                 :<CR> (cmp.mapping.confirm {:select true})})
+            :snippet {:expand (fn [args]
+                                ((. vim.fn "vsnip#anonymous") args.body))}
+            :sources (cmp.config.sources [{:name :nvim_lsp} {:name :vsnip}]
+                                         [{:name :buffer}])
+            :window {}})
+
+;(local capabilities ((. (require :cmp_nvim_lsp) :default_capabilities)))
+;((. (require :lspconfig) :<YOUR_LSP_SERVER> :setup) {: capabilities})
 
 ; (use :neovim/nvim-lspconfig)
 ; (use :hrsh7th/nvim-cmp)

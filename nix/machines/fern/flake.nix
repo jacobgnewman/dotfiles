@@ -2,9 +2,9 @@
   description = "Fern Flake";
   inputs = {
     nixpkgs = {
-    #   url = "github:NixOS/nixpkgs/nixos-unstable";
-    # };
-    # nixpkgs-stable = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+    nixpkgs-stable = {
       url = "github:NixOS/nixpkgs/nixos-24.11";
     };
 
@@ -16,7 +16,7 @@
   outputs = {
     self,
     nixpkgs,
-    # nixpkgs-stable,
+    nixpkgs-stable,
     lix-module,
   }: {
     nixosConfigurations = {
@@ -24,12 +24,12 @@
         system = "x86_64-linux";
 
         # pass non-default nixpkgs to other modules
-        # specialArgs = {
-        #   pkgs-stable = import nixpkgs-stable {
-        #     inherit system; # rec
-        #     config.allowUnfree = true;
-        #   };
-        # };
+        specialArgs = {
+          pkgs-stable = import nixpkgs-stable {
+            inherit system; # rec
+            config.allowUnfree = true;
+          };
+        };
 
         modules = [
           ./configuration.nix

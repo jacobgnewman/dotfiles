@@ -1,6 +1,6 @@
 [{1 :Olical/conjure
   :dependencies [:PaterJason/cmp-conjure]
-  :ft [:clojure :fennel :python :racket]
+  :ft [:clojure :fennel :python :racket :rust]
   :lazy true}
  {1 :PaterJason/cmp-conjure
   :lazy true
