@@ -36,7 +36,6 @@
     zfs
   ];
 
-
   programs.nix-ld.enable = true;
   programs.direnv.enable = true;
 
@@ -47,7 +46,7 @@
   services.jellyfin = {
     enable = true;
     openFirewall = true;
-    user="gray";
+    user = "gray";
   };
 
   services.openssh = {

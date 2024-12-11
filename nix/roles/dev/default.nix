@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # C & Friends
     libgcc
@@ -42,27 +39,28 @@
 
     # nix
     nil
+    alejandra
 
     # Prolog
     swi-prolog
 
     # Python
-    python312Full
-    python312Packages.pip
+    python313Full
+    python313Packages.pip
     pyright
 
     # Racket
     racket
 
     # Rust
-    # rustup
+    rustup
 
     # Sagemath
     # sage
 
     # Typst
     typst
-    tinymist 
+    tinymist
 
     # sw libraries
     ffmpeg

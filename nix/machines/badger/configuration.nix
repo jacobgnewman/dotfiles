@@ -17,6 +17,15 @@
   # nix settings
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # testing
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/user/my-nixos-config";
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -42,7 +51,7 @@
   # networking settings
   networking.hostName = "badger"; # Define your hostname.
   networking.networkmanager.enable = true;
-
+  hardware.bluetooth.enable = true;
   security.sudo.wheelNeedsPassword = false;
   programs.nix-ld.enable = true;
 
@@ -59,6 +68,8 @@
     enable = true;
     enable32Bit = true;
   };
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.open = false;
   programs.steam = {
     enable = true;
   };
@@ -66,8 +77,10 @@
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
 
-  programs.firefox.enable = true;
-
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-devedition;
+  };
 
   # Services
 

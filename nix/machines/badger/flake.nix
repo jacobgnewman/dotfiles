@@ -5,10 +5,10 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     nixpkgs-stable = {
-      url = "github:NixOS/nixpkgs/nixos-24.05";
+      url = "github:NixOS/nixpkgs/nixos-24.11";
     };
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0-rc1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -22,7 +22,7 @@
     nixosConfigurations = {
       badger = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        
+
         # pass non-default nixpkgs to other modules
         specialArgs = {
           pkgs-stable = import nixpkgs-stable {

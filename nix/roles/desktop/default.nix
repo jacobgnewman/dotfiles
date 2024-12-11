@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Desktop Environment
   imports = [
     ./kde.nix
@@ -61,6 +58,7 @@
     alegreya
     font-awesome
     jetbrains-mono
+    nerd-fonts.lilex
     departure-mono
     # (import ./../../pkgs/lilex)
   ];
