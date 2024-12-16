@@ -14,6 +14,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # head -c4 /dev/urandom | od -A none -t x4
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
+  boot.zfs.extraPools = [ "smoldrive" "bigdrive" ];
+  boot.zfs.devNodes = "/dev/disk/by-id";
+
+  networking.hostId = "4853ca31";
+
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.hostName = "mountain"; # Define your hostname.
@@ -34,6 +43,8 @@
     vim
     wget
     zfs
+    yt-dlp
+    jellyfin-ffmpeg
   ];
 
   programs.nix-ld.enable = true;
