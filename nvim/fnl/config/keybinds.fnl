@@ -6,15 +6,15 @@
 (fn keybind-visual [keybind command opts] (keybind :v keybind command opts))
 
 ;; neotree bindings
-(local neotree-command (require :neo-tree.command))
-(fn toggle-neotree []
-  (if (= vim.bo.filetype :neo-tree)
-      ;; open or focus
-      (neotree-command.execute {:action :close})
-      ;; close if focused
-      (neotree-command.execute {:action :focus})))
+;(local neotree-command (require :neo-tree.command))
+;(fn toggle-neotree []
+;  (if (= vim.bo.filetype :neo-tree)
+;      ;; open or focus
+;      (neotree-command.execute {:action :close})
+;      ;; close if focused
+;      (neotree-command.execute {:action :focus})))
 
-(keybind :n :<leader>e toggle-neotree
+(keybind :n :<leader>e "<cmd>Neotree filesystem reveal current<cr>"
          {:noremap true :silent true :desc "Toggle Neotree"})
 
 ;; setup yank to clipboard

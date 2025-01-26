@@ -13,7 +13,7 @@
     ghidra
     pwndbg
     imhex
-    (qt6Packages.callPackage ./binja {})
+    # (qt6Packages.callPackage ./binja {})
     qemu
   ];
 }

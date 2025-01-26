@@ -1,4 +1,4 @@
--- [nfnl] Compiled from config/options.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] Compiled from fnl/config/options.fnl by https://github.com/Olical/nfnl, do not edit.
 vim.g.mapleader = " "
 vim.keymap.set("n", "<Space>", "<Nop>", {silent = true})
 vim.keymap.set("v", "<Space>", "<Nop>", {silent = true})

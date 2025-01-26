@@ -7,7 +7,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../users/gray.nix
-    # ../../roles/ctf
+    ../../roles/ctf
     ../../roles/desktop
     ../../roles/dev
     ../../roles/general
@@ -24,6 +24,11 @@
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/user/my-nixos-config";
+  };
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
   };
 
   # Bootloader.
@@ -84,7 +89,7 @@
 
   # Services
 
-  services.jellyfin.enable = true;
+  # services.jellyfin.enable = true;
 
   services.openssh.enable = true;
 

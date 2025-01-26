@@ -15,17 +15,16 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # head -c4 /dev/urandom | od -A none -t x4
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = ["zfs"];
   boot.zfs.forceImportRoot = false;
-  boot.zfs.extraPools = [ "smoldrive" "bigdrive" ];
+  boot.zfs.extraPools = ["smoldrive" "bigdrive"];
   boot.zfs.devNodes = "/dev/disk/by-id";
 
   networking.hostId = "4853ca31";
 
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  networking.hostName = "mountain"; # Define your hostname.
+  networking.hostName = "mountain";
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -36,14 +35,18 @@
     COLORTERM = "truecolor";
   };
 
-  # save some typing :)
   security.sudo.wheelNeedsPassword = false;
+
   environment.systemPackages = with pkgs; [
     nginx
     vim
     wget
     zfs
     yt-dlp
+
+    # needed?
+    jellyfin
+    jellyfin-web
     jellyfin-ffmpeg
   ];
 
@@ -72,8 +75,8 @@
     enable = true;
     user = "gray";
     guiAddress = "100.81.65.124:8384";
-    dataDir = "/home/gray/sync"; # Default folder for new synced folders
-    configDir = "/home/gray/.config/syncthing"; # Folder for Syncthing's settings and keys
+    dataDir = "/home/gray/sync";
+    configDir = "/home/gray/.config/syncthing";
   };
 
   services.tailscale = {
@@ -84,33 +87,19 @@
     ];
   };
 
+  services.nginx = {
+    enable = true;
+    virtualHosts.localhost = {
+      locations."/" = {
+        return = "200 '<html><body>It works</body></html>'";
+        extraConfig = ''
+          default_type text/html;
+        '';
+      };
+    };
+  };
+
   services.vaultwarden.enable = true;
-
-  # security.acme = {
-  #   acceptTerms = true;
-  #   defaults = {
-  #     email = "acme@mountainrose.ca";
-  #     dnsProvider = "cloudflare";
-  #     environmentFile = "/var/lib/secrets/cloudflare.env";
-  #   };
-  # };
-
-  # users.users.nginx.extraGroups = ["acme"];
-  # services.nginx = {
-  #   enable = true;
-
-  #   # Use recommended settings
-  #   recommendedGzipSettings = true;
-
-  #   virtualHosts."vaultwarden.mountainrose.ca" = {
-  #     enableACME = true;
-  #     acmeRoot = null;
-  #     forceSSL = true;
-  #     locations."/" = {
-  #       proxyPass = "http://127.0.0.1:8000";
-  #     };
-  #   };
-  # };
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

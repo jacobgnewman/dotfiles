@@ -37,6 +37,7 @@
     chromium # terrible browser
     dolphin-emu
     gimp # Image editor
+    ghostty # new terminal editor
     halloy # IRC client
     inkscape # Vector graphics
     krita # oss painting platform

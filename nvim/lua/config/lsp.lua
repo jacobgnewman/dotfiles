@@ -1,4 +1,4 @@
--- [nfnl] Compiled from config/lsp.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] Compiled from fnl/config/lsp.fnl by https://github.com/Olical/nfnl, do not edit.
 local lspconfig = require("lspconfig")
 local lspconfig_configs = require("lspconfig.configs")
 local function lsp_callback(event)
@@ -23,11 +23,10 @@ lspconfig.tinymist.setup({capabilities = capabilities})
 lspconfig.nil_ls.setup({capabilities = capabilities})
 lspconfig.pylsp.setup({capabilities = capabilities})
 lspconfig.racket_langserver.setup({capabilities = capabilities})
-lspconfig.rust_analyzer.setup({capabilities = capabilities, settings = {["rust-analyzer"] = {diagnostics = {enable = true}}}})
 lspconfig.astro.setup({capabilities = capabilities, cmd = {"astro-ls", "--stdio"}, filetypes = {"astro"}, root_dir = lspconfig.util.root_pattern("package.json", ".git")})
 local cmp = require("cmp")
 local function _1_(args)
-  _G.assert((nil ~= args), "Missing argument args on /home/gray/.config/nvim/fnl/config/lsp.fnl:71")
+  _G.assert((nil ~= args), "Missing argument args on /home/gray/dotfiles/nvim/fnl/config/lsp.fnl:71")
   return vim.snippet.expand(args.body)
 end
 cmp.setup({sources = {name = "nvim_lsp"}, snippet = {expand = _1_}, mapping = cmp.mapping.preset.insert({})})

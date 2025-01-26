@@ -13,23 +13,31 @@
                             :formatters_by_ft {:fennel [:fnlfmt]
                                                :nix [:alejandra]}}}
                     ;; Editor UI
-                    {1 :echasnovski/mini.nvim :version false}
                     ;; ?
-                    {1 :ggandor/leap.nvim}
+                    {1 :echasnovski/mini.nvim :version false}
                     ;; fast movement
+                    {1 :ggandor/leap.nvim}
+                    ;; buffer at top of editor
                     {1 :akinsho/bufferline.nvim
                      :version "*"
                      :dependencies :nvim-tree/nvim-web-devicons}
-                    ;; buffer at top of editor
+                    ;; see lsp progress
+                    {1 :j-hui/fidget.nvim}
+                    ;; switch fast between files
+                    {1 :cbochs/grapple.nvim
+                     :dependencies [{1 :nvim-tree/nvim-web-devicons :lazy true}]}
                     {1 :nvim-lualine/lualine.nvim
                      :dependencies :nvim-tree/nvim-web-devicons}
                     ;; label search matches, TODO: update keys...
-                    {1 :folke/flash.nvim :event :VeryLazy :keys []}
-                    ;; Colors...
-                    {1 :ntk148v/habamax.nvim :dependencies [:rktjmp/lush.nvim]}
+                    ;;{1 :folke/flash.nvim :event :VeryLazy :keys []}
+                    ;; Colors..
+                    ;;{1 :ntk148v/habamax.nvim :dependencies [:rktjmp/lush.nvim]}
                     {1 :folke/tokyonight.nvim :lazy true :opts {:style :moon}}
+                    {1 :sainnhe/everforest}
                     ;; Fennel
                     {1 :Olical/nfnl :ft :fennel}
+                    ;; Rust
+                    {1 :mrcjkb/rustaceanvim :version :^5 :lazy false}
                     {:import :packages}]
              :defaults {;; TODO: convert more packages to lazy
                         :lazy false

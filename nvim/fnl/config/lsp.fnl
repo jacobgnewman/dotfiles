@@ -54,8 +54,8 @@
 (lspconfig.racket_langserver.setup {: capabilities})
 
 ;; Rust
-(lspconfig.rust_analyzer.setup {: capabilities
-                                :settings {:rust-analyzer {:diagnostics {:enable true}}}})
+;(lspconfig.rust_analyzer.setup {: capabilities
+;                                :settings {:rust-analyzer {:diagnostics {:enable true}}}})
 
 ;; WEB :(
 

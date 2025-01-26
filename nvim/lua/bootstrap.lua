@@ -1,4 +1,4 @@
--- [nfnl] Compiled from bootstrap.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] Compiled from fnl/bootstrap.fnl by https://github.com/Olical/nfnl, do not edit.
 local function bootstrap_lazy()
   local fsm = (vim.uv or vim.loop)
   local lazypath = (vim.fn.stdpath("data") .. "/lazy/lazy.nvim")

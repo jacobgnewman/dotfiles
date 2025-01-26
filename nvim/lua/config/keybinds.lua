@@ -1,4 +1,4 @@
--- [nfnl] Compiled from config/keybinds.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] Compiled from keybinds.fnl by https://github.com/Olical/nfnl, do not edit.
 local function keybind(mode, keybind0, command, opts)
   return vim.keymap.set(mode, keybind0, command, opts)
 end
@@ -8,15 +8,7 @@ end
 local function keybind_visual(keybind0, command, opts)
   return keybind0("v", keybind0, command, opts)
 end
-local neotree_command = require("neo-tree.command")
-local function toggle_neotree()
-  if (vim.bo.filetype == "neo-tree") then
-    return neotree_command.execute({action = "close"})
-  else
-    return neotree_command.execute({action = "focus"})
-  end
-end
-keybind("n", "<leader>e", toggle_neotree, {noremap = true, silent = true, desc = "Toggle Neotree"})
+keybind("n", "<leader>e", "<cmd>Neotree filesystem reveal current<cr>", {noremap = true, silent = true, desc = "Toggle Neotree"})
 keybind("v", "<leader>y", "\"+y", {noremap = true, silent = true, desc = "Copy to clipboard"})
 keybind("n", "<leader>p", "\"+p", {noremap = true, silent = true, desc = "Paste Clipboard"})
 keybind("v", "<leader>p", "\"+p", {noremap = true, silent = true, desc = "Paste Clipboard"})
