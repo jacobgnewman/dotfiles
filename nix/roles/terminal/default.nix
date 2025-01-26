@@ -5,6 +5,7 @@
 
   environment.systemPackages = with pkgs; [
     atuin # sync'd shell history
+    azure-cli
     bat
     btop
     bore-cli # NAT tunneling
@@ -27,6 +28,7 @@
     postgresql
     pdfgrep # what it says on the tin
     ripgrep # fast grep
+    twm
     pdfgrep
     unzip
     wireguard-tools

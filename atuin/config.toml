@@ -1,2 +1,4 @@
 enter_accept = false
 style = "compact"
+filter_mode_shell_up_key_binding = "directory"
+

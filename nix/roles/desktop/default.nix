@@ -2,7 +2,7 @@
   # Desktop Environment
   imports = [
     ./kde.nix
-    # ./sway.nix
+    ./sway.nix
   ];
 
   # Login Manager
@@ -18,7 +18,7 @@
   };
 
   # Audio Config
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -32,6 +32,7 @@
   environment.systemPackages = with pkgs; [
     # GUI Apps
     alacritty # terminal emulator
+    ghostty
     anki # spaced repition
     blender # 3d modeling
     chromium # terrible browser

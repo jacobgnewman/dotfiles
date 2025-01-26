@@ -72,14 +72,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # toybox
     # School networking
     # openconnect_openssl
-
-    # profiling workloads
-    # linuxPackages_latest.perf # profiler
-    # flamegraph # chart generator
-    # hotspot # gui
   ];
 
   services.syncthing = {

@@ -10,7 +10,7 @@
     burpsuite
     wireshark
     wabt
-    ghidra
+    pkgs-stable.ghidra
     pwndbg
     imhex
     # (qt6Packages.callPackage ./binja {})

@@ -6,6 +6,15 @@
     llvm
     clang
 
+    # capstone
+    # nrfutil
+    # cmake
+    # ninja
+    # nrfconnect
+    # nrf-command-line-tools
+    # python312Packages.west
+    # segger-jlink
+
     # Debugger tools
     rr
 
