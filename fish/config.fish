@@ -8,9 +8,13 @@ if status is-interactive
 
 end
 
-set --universal pure_enable_single_line_prompt true
+# set --universal pure_enable_single_line_prompt true
 set --universal pure_show_system_time true
 set --universal pure_color_system_time pure_color_normal
+
+# shorten output
+#set pure_shorten_prompt_current_directory_length 1
+#set pure_truncate_prompt_current_directory_keeps 0
 
 # remove fish greeting prompt
 set fish_greeting

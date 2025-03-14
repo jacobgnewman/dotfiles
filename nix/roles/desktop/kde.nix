@@ -1,12 +1,18 @@
 {pkgs, ...}: {
   services.desktopManager.plasma6.enable = true;
+  # services.displayManager.defaultSession = "plasmax11";
 
   # why is screen sharing hard
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-kde
-      xdg-desktop-portal-wlr
+    config = {
+      common = {
+        default = "*";
+      };
+    };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
     ];
   };
 

@@ -6,12 +6,13 @@
   environment.systemPackages = with pkgs; [
     nmap
     nasm
-    binwalk
+    sage
+    # binwalk
     burpsuite
     wireshark
     wabt
     pkgs-stable.ghidra
-    pwndbg
+    # pwndbg
     imhex
     # (qt6Packages.callPackage ./binja {})
     qemu

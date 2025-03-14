@@ -1,10 +1,21 @@
 (local lazy (require :lazy))
 
+(fn mod [& args]
+  (let [to-merge (when (table? (. args (length args)))
+                   (table.remove args))]
+    (if to-merge
+        (do
+          (each [key value (pairs to-merge)]
+            (tset args key value))
+          args)
+        args)))
+
 (lazy.setup {:spec [;; LSP && Completion
                     {1 :neovim/nvim-lspconfig}
                     {1 :hrsh7th/nvim-cmp
                      :dependancies [:hrsh7th/cmp-nvim-lsp :hrsh7th/cmp-buffer]}
                     {1 :hrsh7th/cmp-nvim-lsp}
+                    {1 :hrsh7th/cmp-buffer}
                     {1 :hrsh7th/vim-vsnip}
                     ;; Formatting
                     {1 :stevearc/conform.nvim

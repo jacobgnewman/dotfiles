@@ -2,7 +2,7 @@
   # Desktop Environment
   imports = [
     ./kde.nix
-    ./sway.nix
+    ./niri.nix
   ];
 
   # Login Manager
@@ -34,8 +34,9 @@
     alacritty # terminal emulator
     ghostty
     anki # spaced repition
-    blender # 3d modeling
+    # blender # 3d modeling
     chromium # terrible browser
+    discord
     dolphin-emu
     gimp # Image editor
     ghostty # new terminal editor
@@ -53,7 +54,7 @@
     vesktop # discord client wayland
     vscode.fhs # Vscode editor unwrapped?
     vlc
-    zed-editor # zed, faster version of ^
+    #zed-editor # zed, faster version of ^
   ];
 
   fonts.packages = with pkgs; [

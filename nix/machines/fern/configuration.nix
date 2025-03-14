@@ -51,7 +51,22 @@
       enable = true;
       unmanaged = ["tailscale0"];
     };
+
     # wireless.iwd.package = pkgs-stable.iwd;
+
+    wireless.iwd.settings = {
+      IPv6 = {
+        Enabled = true;
+      };
+      Settings = {
+        AutoConnect = true;
+      };
+    };
+  };
+
+  programs.niri.enable = true;
+  services.fuse = {
+    enable = true;
   };
 
   # stop boot from delaying for no reason...

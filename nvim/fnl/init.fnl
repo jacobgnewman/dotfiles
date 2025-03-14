@@ -21,6 +21,8 @@
 (_G.vim.keymap.set :n :<leader>r
                    ":w <bar> exec '!python3 '.shellescape('%')<CR>")
 
+(_G.vim.keymap.set :n :<leader>l "aλ<Esc>")
+
 ((. (require :leap) :create_default_mappings))
 ((. (require :bufferline) :setup))
 

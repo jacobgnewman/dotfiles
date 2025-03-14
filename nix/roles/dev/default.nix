@@ -37,7 +37,7 @@
     deno
 
     # Latex
-    tectonic
+    #tectonic
 
     # Lua
     lua

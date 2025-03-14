@@ -5,7 +5,7 @@
 
   environment.systemPackages = with pkgs; [
     atuin # sync'd shell history
-    azure-cli
+    # azure-cli
     bat
     btop
     bore-cli # NAT tunneling
