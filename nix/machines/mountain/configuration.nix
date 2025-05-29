@@ -38,6 +38,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
+    rsync
     nginx
     vim
     wget
@@ -61,6 +62,18 @@
     enable = true;
     openFirewall = true;
     user = "gray";
+  };
+
+  # services.soju.enable = true;
+
+  services.anki-sync-server = {
+	  enable = true;
+    users = [ 
+      {
+        username="gray";
+        passwordFile = "/etc/nixos/anki-pw";
+      }
+    ];
   };
 
   services.openssh = {
@@ -96,11 +109,28 @@
           default_type text/html;
         '';
       };
+      locations."/miniflux" = {
+        proxyPass = "http://127.0.0.1:8080";
+        extraConfig = ''
+        '';
+      };
+      locations."/anki" = {
+        proxyPass = "http://127.0.0.1:27701";
+        extraConfig = ''
+        '';
+      };
     };
   };
 
   services.vaultwarden.enable = true;
 
+  services.miniflux = {
+    enable = true;
+    config = {
+      BASE_URL = "http://mountain.boreal-climb.ts.net/miniflux";
+    };
+    adminCredentialsFile = "/etc/nixos/miniflux-creds";
+  };
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
