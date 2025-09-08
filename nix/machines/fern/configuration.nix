@@ -35,7 +35,8 @@
   # System Time & localization
   # `timedatectl list-timezones` or `timedatectl set-timezone C`
   # time.timeZone = "America/Vancouver";
-  time.timeZone = "America/Vancouver";
+  time.timeZone = "Asia/Seoul";
+
   i18n.defaultLocale = "en_CA.UTF-8";
   services.xserver.xkb = {
     layout = "us";
@@ -65,12 +66,17 @@
   };
 
   programs.niri.enable = true;
-  services.fuse = {
+  programs.nh = {
     enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/gray/dotfiles/nix/machines/fern/"; # sets NH_OS_FLAKE variable for you
   };
 
   # stop boot from delaying for no reason...
   systemd.services.NetworkManager-wait-online.enable = false;
+
+  networking.firewall.allowedTCPPorts = [8765];
 
   hardware.bluetooth = {
     enable = true;
@@ -114,7 +120,7 @@
 
   programs.firefox.enable = true;
 
-  programs.ssh.startAgent = true;
+  #programs.ssh.startAgent = true;
   services.openssh = {
     enable = true;
     settings = {

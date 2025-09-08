@@ -12,6 +12,7 @@
     # binutils
     direnv
     dust # better graphical du
+    helix
     lazydocker # TUI for docker stuff
     lazygit # TUI git
     file
@@ -28,6 +29,7 @@
     postgresql
     pdfgrep # what it says on the tin
     ripgrep # fast grep
+    socat
     twm
     pdfgrep
     unzip

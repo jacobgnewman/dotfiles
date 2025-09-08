@@ -11,9 +11,13 @@
 
   # sway specific packages
   environment.systemPackages = with pkgs; [
-    fuzzel # application launcher
     colord # manage color profiles TODO! fix?
+    coppwr # audio routing
+    bitwarden-cli
     slurp # selection window
+    fuzzel # application launcher
+    swaybg # wallpaper
+    swaylock
     grim # screenshot
     wl-clipboard # clipboard cli interface
     brightnessctl # modify display brightness
@@ -21,7 +25,7 @@
     wf-recorder # screen recording
     mako # notification daemon
     pwvucontrol # volume control
-    coppwr # audio routing
+    xwayland-satellite # xwayland window
   ];
 
   # Required ENV variables for Sway to play nice with apps

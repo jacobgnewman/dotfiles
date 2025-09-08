@@ -11,6 +11,7 @@
     enable = true;
     settings = {
       default_session = {
+        # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
         user = "greeter";
       };
@@ -35,6 +36,7 @@
     ghostty
     anki # spaced repition
     # blender # 3d modeling
+    bitwarden-desktop
     chromium # terrible browser
     discord
     dolphin-emu
@@ -54,7 +56,7 @@
     vesktop # discord client wayland
     vscode.fhs # Vscode editor unwrapped?
     vlc
-    #zed-editor # zed, faster version of ^
+    zed-editor # zed, faster version of ^
   ];
 
   fonts.packages = with pkgs; [
@@ -63,6 +65,5 @@
     jetbrains-mono
     nerd-fonts.lilex
     departure-mono
-    # (import ./../../pkgs/lilex)
   ];
 }

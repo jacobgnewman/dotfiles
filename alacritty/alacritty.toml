@@ -7,3 +7,5 @@ normal = { family = "Lilex Nerd Font Mono" }
 
 [general]
 import = ["~/.config/alacritty/vesper.toml"]
+[window]
+#decorations = "None"

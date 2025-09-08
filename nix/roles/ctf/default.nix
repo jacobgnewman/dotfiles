@@ -15,6 +15,7 @@
     # pwndbg
     imhex
     # (qt6Packages.callPackage ./binja {})
+    mesen # retro rev
     qemu
   ];
 }

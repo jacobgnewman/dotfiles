@@ -3,12 +3,11 @@
 	"position": "top",
 
 	"modules-left": [
-		"sway/mode",
-		"sway/workspaces",
+		"niri/workspaces",
+		"niri/window",
 	],
 
 	"modules-center": [
-		"sway/window"
 	],
 
 	"modules-right": [
@@ -48,8 +47,8 @@
 	},
 
 	"clock#time": {
-		"interval": 1,
-		"format": "{:%H:%M:%S}",
+		"interval": 10,
+		"format": "{:%H:%M}",
 		"tooltip": false
 	},
 
@@ -71,12 +70,6 @@
 		}
 	},
 
-	"sway/language": {
-		"format": " {}",
-		"min-length": 5,
-		"on-click": "swaymsg 'input * xkb_switch_layout next'",
-		"tooltip": false
-	},
 
 	"memory": {
 		"interval": 5,
@@ -95,24 +88,6 @@
 		"format-disconnected": "No connection",
 		"format-alt": " {ipaddr}/{cidr}",
 		"tooltip": false
-	},
-
-	"sway/mode": {
-		"format": "{}",
-		"tooltip": false
-	},
-
-	"sway/window": {
-		"format": "{}",
-		"max-length": 50,
-		"tooltip": false
-	},
-
-	"sway/workspaces": {
-		"disable-scroll-wraparound": true,
-		"smooth-scrolling-threshold": 4,
-		"enable-bar-scroll": true,
-		"format": "{name}"
 	},
 
 	"pulseaudio": {
