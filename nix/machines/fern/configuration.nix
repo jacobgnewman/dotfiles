@@ -1,135 +1,117 @@
+# Help: configuration.nix(5) man page, https://search.nixos.org/options and `nixos-help`
+
+{ config, lib, pkgs, ... }:
 {
-  config,
-  pkgs,
-  pkgs-stable,
-  ...
-}: {
-  imports = [
-    ./hardware-configuration.nix
-    ./framework.nix
-    ../../users/gray.nix
-    ../../roles/ctf
-    ../../roles/desktop
-    ../../roles/dev
-    ../../roles/general
-    ../../roles/terminal
-  ];
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      (builtins.fetchTarball {
+        url = "https://github.com/nix-community/disko/archive/master.tar.gz";
+        sha256 = "zygdD6X1PcVNR2PsyK4ptzrVEiAdbMqLos7utrMDEWE=";
+      } + "/module.nix")
+      (import ./disk-config.nix { zpoolName = "rpool"; } )
 
-  # run builds on badger to speed up builds and conserve *FAN NOISE*
-  # nix = {
-  #   distributedBuilds = true;
-  #   buildMachines = [
-  #     {
-  #       hostName = "badger";
-  #       system = "x86_64-linux";
-  #       maxJobs = 100;
-  #       supportedFeatures = ["benchmark" "big-parallel"];
-  #     }
-  #   ];
-  # };
+    ];
 
-  # Bootloader
+  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # System Time & localization
-  # `timedatectl list-timezones` or `timedatectl set-timezone C`
-  # time.timeZone = "America/Vancouver";
-  time.timeZone = "Asia/Seoul";
+  networking.hostId = "9f521a2b";
+  networking.hostName = "fern"; # Define your hostname.
 
-  i18n.defaultLocale = "en_CA.UTF-8";
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # Configure network connections interactively with nmcli or nmtui.
+  networking.networkmanager.enable = true;
 
-  # networking settings
-  networking = {
-    hostName = "fern";
-    wireless.userControlled.enable = true;
-    networkmanager = {
-      wifi.backend = "iwd"; # seems broken on UBC wifi :(
-      enable = true;
-      unmanaged = ["tailscale0"];
-    };
+  # nix settings
+  nix.package = pkgs.lixPackageSets.stable.lix;
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-    # wireless.iwd.package = pkgs-stable.iwd;
-
-    wireless.iwd.settings = {
-      IPv6 = {
-        Enabled = true;
-      };
-      Settings = {
-        AutoConnect = true;
-      };
-    };
-  };
-
-  programs.niri.enable = true;
+  # nh
   programs.nh = {
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/gray/dotfiles/nix/machines/fern/"; # sets NH_OS_FLAKE variable for you
+    flake = "/home/gray/dotfiles/nix/machines/fern";
   };
 
-  # stop boot from delaying for no reason...
-  systemd.services.NetworkManager-wait-online.enable = false;
 
-  networking.firewall.allowedTCPPorts = [8765];
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  hardware.bluetooth = {
+
+  # TODO! move desktop setup
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+  # Enable the GNOME Desktop Environment
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # TODO move over to user defined file...
+  programs.zsh = {
     enable = true;
-    powerOnBoot = true;
-    #package = pkgs-stable.bluez;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
   };
 
-  programs.nix-ld.enable = true;
+  users.users.gray = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
 
-  services.gnome.gnome-keyring.enable = true;
-
-  environment.sessionVariables = {
-    EDITOR = "nvim";
+    ];
+    shell = pkgs.zsh;
   };
-
-  environment.systemPackages = with pkgs; [
-    # School networking
-    # openconnect_openssl
-  ];
-
-  services.syncthing = {
-    enable = true;
-    user = "gray";
-    dataDir = "/home/gray/";
-  };
-
-  # hardware.graphics = {
-  #   enable = true;
-  #   enable32Bit = true;
-  # };
-  programs.steam = {
-    enable = true;
-  };
-
-  security.sudo.wheelNeedsPassword = false;
-
-  virtualisation.docker.enable = true;
-  # virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
-  # users.extraGroups.vboxusers.members = ["gray"];
 
   programs.firefox.enable = true;
 
-  #programs.ssh.startAgent = true;
-  services.openssh = {
+  # List packages installed in system profile.
+  # You can use https://search.nixos.org/ to find more packages (and options).
+  environment.systemPackages = with pkgs; [
+    helix
+    alacritty
+    atuin
+    neovim
+    wget
+    git
+    gh
+    qemu
+    obsidian
+  ];
+
+  services.atuin.enable = true;
+
+  services.tailscale = {
     enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-    };
   };
 
-  services.tailscale.enable = true;
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 
-  system.stateVersion = "24.05"; # Did you read the comment?
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  system.stateVersion = "25.11"; # Did you read the comment?
 }
