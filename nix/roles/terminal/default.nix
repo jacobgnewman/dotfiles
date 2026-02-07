@@ -1,40 +1,27 @@
-{pkgs, ...}: {
-  imports = [
-    ./fish.nix
-  ];
-
+# Any packages that are nice for interactive terminal use
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
-    atuin # sync'd shell history
-    # azure-cli
-    bat
-    btop
-    bore-cli # NAT tunneling
-    # binutils
-    direnv
-    dust # better graphical du
-    helix
-    lazydocker # TUI for docker stuff
-    lazygit # TUI git
-    file
-    fzf # fuzzy finder
-    fd # nice find alternative with better defaults
-    google-cloud-sdk # GCP TUI controller
-    jq # cmdline json parser
-    jujutsu # git compat VCS
-    kubectl # kubernetes CLI
-    litecli # sqlite cli
-    ncspot
-    openvpn # VPN util
-    pgcli
-    postgresql
-    pdfgrep # what it says on the tin
-    ripgrep # fast grep
-    socat
-    twm
-    pdfgrep
-    unzip
+    # VPN utils
+    openvpn
     wireguard-tools
-    zoxide # improved z
+
+    # Terminal QOL tools
+    bat # cat with syntax highlighting
+    btop # better htop
+    dust # better graphical du
+    fd # nice find alternative with better defaults
+    file # info about files in directory
+    fzf # fuzzy finder
+    jq # cmdline json parser
+    ripgrep # fast grep
+    socat # host command on port
+    tree # show a 'tree' view of current directory
+    tmux # terminal multiplexer
+    zoxide # fuzzy cd with history
+
+    # compression utils
     zip
+    unzip
   ];
 }
