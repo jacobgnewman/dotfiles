@@ -15,4 +15,12 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC8HYF1wiHS/6Xd4fibJ/WsNK8qDaO8N9Y8JG8sXEt/+" # dusk
     ];
   };
+
+  # TODO move to separate file...
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
 }

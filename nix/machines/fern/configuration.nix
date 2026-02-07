@@ -58,13 +58,6 @@
     enable = true;
   };
 
-  # TODO move over to user defined file...
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-  };
 
 
   environment.localBinInPath = true;
