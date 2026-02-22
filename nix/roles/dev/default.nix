@@ -5,6 +5,7 @@
     # Utils
     direnv # automatic dev-env loading
     jujutsu # git compat VCS system
+    jjui # nice tui for jj
     git
     gh
 
@@ -17,6 +18,9 @@
 
     # Debugger tools
     rr
+
+    # go
+    go
 
     # nix stuff
     nixd

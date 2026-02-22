@@ -20,7 +20,7 @@
     (
       builtins.fetchTarball {
         url = "https://github.com/nix-community/disko/archive/master.tar.gz";
-        sha256 = "zygdD6X1PcVNR2PsyK4ptzrVEiAdbMqLos7utrMDEWE=";
+        sha256 = "89m5VKxIs8QNiIvLsxHu5NpyhDsoXTtoN801IAurnW4=";
       }
       + "/module.nix"
     )
@@ -63,6 +63,7 @@
   environment.localBinInPath = true;
   environment.sessionVariables = {
     EDITOR = "hx";
+    VISUAL = "hx";
     TERMINAL = "ghostty";
   };
 
@@ -73,6 +74,8 @@
 
     ghostty
 
+    google-chrome
+
     atuin
     wget
     git
@@ -81,12 +84,15 @@
     obsidian
   ];
 
-  fonts.packages = with pkgs; [ maple-mono.NF-unhinted ];
+  fonts.packages = with pkgs; [
+    maple-mono.NF-unhinted
+    alegreya
+  ];
 
   # PROGRAMS
 
   programs.firefox.enable = true;
-
+ 
   # nh
   programs.nh = {
     enable = true;
